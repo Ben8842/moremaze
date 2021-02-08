@@ -3,7 +3,17 @@ import "./App.css";
 
 class Building extends Component {
   renderSquare(x, y) {
-    return <button id="square" codeX={x} codeY={y}></button>;
+    function shuffle(arry) {
+      arry.sort(() => Math.random() - 0.5);
+    }
+    function randomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    var z = randomNumber(1, 15);
+    //console.log("square" + z);
+    var rid = "square" + z;
+    //console.log({ rid });
+    return <button id={rid} codeX={x} codeY={y}></button>;
   }
 
   renderGreen(x, y) {
@@ -19,11 +29,7 @@ class Building extends Component {
     var y;
     for (y = 0; y < viewSize; y++) {
       for (x = 0; x < viewSize; x++) {
-        if (x % y == 0) {
-          elementS.push(<span>{this.renderGreen(x, y)}</span>);
-        } else {
-          elementS.push(<span>{this.renderSquare(x, y)}</span>);
-        }
+        elementS.push(<span>{this.renderSquare(x, y)}</span>);
       }
       elementZ.push(
         <div className="newLine">
@@ -56,7 +62,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 100,
+      count: 10,
     };
   }
   enterCount() {
