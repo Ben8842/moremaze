@@ -16,17 +16,12 @@ button:focus {
 #square {
   background-color: white;
   color: black;
+  padding: 0;
 
   font-weight: bold;
 
   height: 18px;
 
-  text-align: center;
-  width: 34px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -43,31 +38,21 @@ button:focus {
 
   text-align: center;
   width: 34px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
 }
 
 #square1 {
   background-color: white;
   color: black;
+  background: white;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: none;
-  border-bottom-style: none;
-  border-left-style: none;
+  border-top: solid;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -75,20 +60,15 @@ button:focus {
 #square2 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: solid;
-  border-bottom-style: none;
-  border-left-style: none;
+  border-top: none;
+  border-right: solid;
+  border-bottom: none;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -96,20 +76,15 @@ button:focus {
 #square3 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: solid;
-  border-left-style: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: solid;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -117,20 +92,15 @@ button:focus {
 #square4 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: none;
-  border-left-style: solid;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -138,20 +108,15 @@ button:focus {
 #square5 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: none;
-  border-bottom-style: solid;
-  border-left-style: none;
+  border-top: solid;
+  border-right: none;
+  border-bottom: solid;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -159,20 +124,15 @@ button:focus {
 #square6 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: solid;
-  border-bottom-style: none;
-  border-left-style: solid;
+  border-top: none;
+  border-right: solid;
+  border-bottom: none;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -180,20 +140,15 @@ button:focus {
 #square7 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: solid;
-  border-bottom-style: none;
-  border-left-style: none;
+  border-top: solid;
+  border-right: solid;
+  border-bottom: none;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -201,20 +156,15 @@ button:focus {
 #square8 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: solid;
-  border-bottom-style: solid;
-  border-left-style: none;
+  border-top: none;
+  border-right: solid;
+  border-bottom: solid;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -222,20 +172,15 @@ button:focus {
 #square9 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: solid;
-  border-left-style: solid;
+  border-top: none;
+  border-right: none;
+  border-bottom: solid;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -243,20 +188,15 @@ button:focus {
 #square10 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: none;
-  border-bottom-style: none;
-  border-left-style: solid;
+  border-top: solid;
+  border-right: none;
+  border-bottom: none;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -264,20 +204,15 @@ button:focus {
 #square11 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: solid;
-  border-bottom-style: solid;
-  border-left-style: none;
+  border-top: solid;
+  border-right: solid;
+  border-bottom: solid;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -285,20 +220,15 @@ button:focus {
 #square12 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: solid;
-  border-bottom-style: solid;
-  border-left-style: solid;
+  border-top: none;
+  border-right: solid;
+  border-bottom: solid;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -306,20 +236,15 @@ button:focus {
 #square13 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: none;
-  border-bottom-style: solid;
-  border-left-style: solid;
+  border-top: solid;
+  border-right: none;
+  border-bottom: solid;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -327,20 +252,15 @@ button:focus {
 #square14 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: solid;
-  border-right-style: solid;
-  border-bottom-style: none;
-  border-left-style: solid;
+  border-top: solid;
+  border-right: solid;
+  border-bottom: none;
+  border-left: solid;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }
@@ -348,20 +268,15 @@ button:focus {
 #square15 {
   background-color: white;
   color: black;
+  padding: 0;
 
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: none;
-  border-left-style: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
 
   height: 34px;
 
-  text-align: center;
-  width: 18px;
-
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 34px;
 }

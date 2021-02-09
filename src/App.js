@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import "./App.css";
 
 class Building extends Component {
+  constructor(props) {
+    super(props);
+    var superpath = [];
+    this.state = {
+      path: superpath,
+    };
+  }
+
   renderSquare(x, y) {
     function shuffle(arry) {
       arry.sort(() => Math.random() - 0.5);
@@ -29,15 +37,13 @@ class Building extends Component {
     var y;
     for (y = 0; y < viewSize; y++) {
       for (x = 0; x < viewSize; x++) {
-        elementS.push(<span>{this.renderSquare(x, y)}</span>);
+        elementS.push(<o>{this.renderSquare(x, y)}</o>);
       }
       elementZ.push(
         <div className="newLine">
-          <span>
-            {elementS.map((value, index) => {
-              return <span key={index}>{value}</span>;
-            })}
-          </span>
+          {elementS.map((value, index) => {
+            return <span key={index}>{value}</span>;
+          })}
         </div>
       );
       for (x = 0; x < viewSize; x++) {
@@ -47,11 +53,9 @@ class Building extends Component {
     return (
       <div className="entireThing">
         <div>
-          <span>
-            {elementZ.map((value, index) => {
-              return <span key={index}>{value}</span>;
-            })}
-          </span>
+          {elementZ.map((value, index) => {
+            return <span key={index}>{value}</span>;
+          })}
         </div>
       </div>
     );
