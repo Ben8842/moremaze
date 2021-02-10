@@ -45,17 +45,41 @@ class Building extends Component {
     var ex = pathX;
     var wy = pathY;
     var nonpath = [];
-    console.log({ pathX });
-    console.log({ pathY });
+    //  console.log({ pathX });
+    //  console.log({ pathY });
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
     console.log(pathX.length + "hi length");
     var checker = 0;
     var i = null;
+
+    function pastDirection(x1, x2, y1, y2) {
+      if (x1 == x2 && y1 > y2) {
+        return 1;
+        //down
+      } else if (x1 == x2 && y1 < y2) {
+        return 2;
+        //up
+      } else if (x1 > x2 && y1 == y2) {
+        return 3;
+        //right
+      } else if (x1 < x2 && y1 == y2) {
+        return 4;
+        //left
+      }
+    }
+    var directionvar = pastDirection(
+      pathX[pathX.length - 1],
+      pathX[pathX.length - 2],
+      pathY[pathY.length - 1],
+      pathY[pathY.length - 2]
+    );
+    console.log(directionvar + "direction?");
+
     if (pathX.length == 1) {
       var chooser = randomNumber(1, 3);
-      console.log(chooser);
+      //   console.log(chooser);
       if (chooser == 1) {
         ex.push(1);
         ex.push(2);
@@ -67,11 +91,47 @@ class Building extends Component {
         wy.push(1);
         wy.push(2);
       } else if (chooser == 3) {
-        console.log("wall");
+        //  console.log("wall");
       }
-    } else if (pathX.length == 3) {
-      var chooser = randomNumber(1, 3);
-      console.log(chooser);
+    } else if (pathX[pathX.length - 1] == 0 && directionvar == 1) {
+      console.log("fun");
+      //right
+      ex.push(ex[ex.length - 1] + 1);
+      ex.push(ex[ex.length - 1] + 1);
+      wy.push(wy[wy.length - 1]);
+      wy.push(wy[wy.length - 1]);
+    } else if (pathX[pathX.length - 1] == 0 && directionvar == 4) {
+      console.log("more fun");
+      //down
+      ex.push(ex[ex.length - 1]);
+      ex.push(ex[ex.length - 1]);
+      wy.push(wy[wy.length - 1] + 1);
+      wy.push(wy[wy.length - 1] + 1);
+    } else if (pathY[pathY.length - 1] == 0 && directionvar == 3) {
+      console.log("more fun");
+      //down
+      ex.push(ex[ex.length - 1]);
+      ex.push(ex[ex.length - 1]);
+      wy.push(wy[wy.length - 1] + 1);
+      wy.push(wy[wy.length - 1] + 1);
+    } else if (pathY[pathY.length - 1] == 0 && directionvar == 2) {
+      console.log("fun");
+      //right
+      ex.push(ex[ex.length - 1] + 1);
+      ex.push(ex[ex.length - 1] + 1);
+      wy.push(wy[wy.length - 1]);
+      wy.push(wy[wy.length - 1]);
+    } else if (
+      pathX.length >= 3 &&
+      pathX[pathX.length - 1] < 8 &&
+      pathY[pathY.length - 1] < 8 &&
+      directionvar == 2 &&
+      pathX[pathX.length - 1] > 0 &&
+      pathY[pathY.length - 1] > 0
+      //down detection
+    ) {
+      var chooser = randomNumber(1, 4);
+      //  console.log(chooser);
       if (chooser == 1) {
         //right
         ex.push(ex[ex.length - 1] + 1);
@@ -85,11 +145,103 @@ class Building extends Component {
         wy.push(wy[wy.length - 1] + 1);
         wy.push(wy[wy.length - 1] + 1);
       } else if (chooser == 3) {
-        console.log("wall");
+        console.log("special");
+        //left
+        ex.push(ex[ex.length - 1] - 1);
+        ex.push(ex[ex.length - 1] - 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
       }
-    } else if (pathX.length == 5) {
+    } else if (
+      pathX.length >= 3 &&
+      pathX[pathX.length - 1] < 8 &&
+      pathY[pathY.length - 1] < 8 &&
+      directionvar == 1
+      //up detection
+    ) {
+      var chooser = randomNumber(1, 4);
+      //  console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //up
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] - 1);
+        wy.push(wy[wy.length - 1] - 1);
+      } else if (chooser == 3) {
+        console.log("special");
+        //left
+        ex.push(ex[ex.length - 1] - 1);
+        ex.push(ex[ex.length - 1] - 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      }
+    } else if (
+      pathX.length >= 3 &&
+      pathX[pathX.length - 1] < 8 &&
+      pathY[pathY.length - 1] < 8 &&
+      directionvar == 3
+      //right detection
+    ) {
+      var chooser = randomNumber(1, 4);
+      //    console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //up
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] - 1);
+        wy.push(wy[wy.length - 1] - 1);
+      } else if (chooser == 3) {
+        console.log("special");
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      }
+    } else if (
+      pathX.length >= 3 &&
+      pathX[pathX.length - 1] < 8 &&
+      pathY[pathY.length - 1] < 8 &&
+      directionvar == 4
+      //left detection
+    ) {
+      var chooser = randomNumber(1, 4);
+      //    console.log(chooser);
+      if (chooser == 1) {
+        //left
+        ex.push(ex[ex.length - 1] - 1);
+        ex.push(ex[ex.length - 1] - 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //up
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] - 1);
+        wy.push(wy[wy.length - 1] - 1);
+      } else if (chooser == 3) {
+        console.log("special");
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      }
+    } else if (pathX.length == 20) {
       var chooser = randomNumber(1, 3);
-      console.log(chooser);
+      //    console.log(chooser);
       if (chooser == 1) {
         //right
         ex.push(ex[ex.length - 1] + 1);
@@ -103,81 +255,9 @@ class Building extends Component {
         wy.push(wy[wy.length - 1] + 1);
         wy.push(wy[wy.length - 1] + 1);
       } else if (chooser == 3) {
-        console.log("wall");
+        //     console.log("wall");
       }
-    } else if (pathX.length == 7) {
-      var chooser = randomNumber(1, 3);
-      console.log(chooser);
-      if (chooser == 1) {
-        //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-        wy.push(wy[wy.length - 1]);
-      } else if (chooser == 2) {
-        //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-        wy.push(wy[wy.length - 1] + 1);
-      } else if (chooser == 3) {
-        console.log("wall");
-      }
-    } else if (pathX.length == 9) {
-      var chooser = randomNumber(1, 3);
-      console.log(chooser);
-      if (chooser == 1) {
-        //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-        wy.push(wy[wy.length - 1]);
-      } else if (chooser == 2) {
-        //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-        wy.push(wy[wy.length - 1] + 1);
-      } else if (chooser == 3) {
-        console.log("wall");
-      }
-    } else if (pathX.length == 11) {
-      var chooser = randomNumber(1, 3);
-      console.log(chooser);
-      if (chooser == 1) {
-        //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-        wy.push(wy[wy.length - 1]);
-      } else if (chooser == 2) {
-        //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-        wy.push(wy[wy.length - 1] + 1);
-      } else if (chooser == 3) {
-        console.log("wall");
-      }
-    } else if (pathX.length == 9) {
-      var chooser = randomNumber(1, 3);
-      console.log(chooser);
-      if (chooser == 1) {
-        //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-        wy.push(wy[wy.length - 1]);
-      } else if (chooser == 2) {
-        //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-        wy.push(wy[wy.length - 1] + 1);
-      } else if (chooser == 3) {
-        console.log("wall");
-      }
-    } else if (pathX.length == 9) {
+    } else if (pathX.length == 21) {
       var chooser = randomNumber(1, 3);
       console.log(chooser);
       if (chooser == 1) {
@@ -200,7 +280,7 @@ class Building extends Component {
     this.setState((state) => {
       return { pathX: ex, pathY: wy };
     });
-    console.log(ex);
+    //  console.log(ex);
     this.forceUpdate();
   }
 
