@@ -7,10 +7,13 @@ class Building extends Component {
     var superpath = [];
     this.state = {
       path: superpath,
+      pathX: [],
+      pathY: [],
     };
   }
 
   renderSquare(x, y) {
+    var { pathX, pathY } = this.state;
     function shuffle(arry) {
       arry.sort(() => Math.random() - 0.5);
     }
@@ -20,12 +23,54 @@ class Building extends Component {
     var z = randomNumber(1, 15);
     //console.log("square" + z);
     var rid = "square" + z;
+    var bid = "b1";
+    var bad = "bplus";
     //console.log({ rid });
-    return <button id={rid} codeX={x} codeY={y}></button>;
+    var i = null;
+    for (i = 0; i < pathX.length; i++) {
+      if (x == pathX[i] && y == pathY[i]) {
+        return <button class={bad} codeX={x} codeY={y}></button>;
+      }
+    }
+    return <button class={bid} codeX={x} codeY={y}></button>;
   }
 
   renderGreen(x, y) {
     return <button id="squareGreen" codeX={x} codeY={y}></button>;
+  }
+
+  pathgenerator() {
+    var { pathX, pathY } = this.state;
+    //new path = { ex: [0], wy: [0] };
+    var ex = [0];
+    var wy = [0];
+    var nonpath = [];
+
+    function randomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    var checker = 0;
+    var i = null;
+    for (i = 0; i < 1; i++) {
+      var chooser = randomNumber(1, 3);
+      if (chooser == 1) {
+        ex.push(ex[0] + 1);
+        ex.push(ex[0] + 2);
+        wy.push(wy[0]);
+        wy.push(wy[0]);
+      } else if (chooser == 2) {
+        ex.push(ex[0]);
+        ex.push(ex[0]);
+        wy.push(wy[0] + 1);
+        wy.push(wy[0] + 2);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    }
+    this.setState((state) => {
+      return { pathX: ex, pathY: wy };
+    });
+    console.log(ex);
   }
 
   render() {
@@ -57,6 +102,9 @@ class Building extends Component {
             return <span key={index}>{value}</span>;
           })}
         </div>
+        <button onClick={() => this.pathgenerator()}>
+          Click to generate path
+        </button>
       </div>
     );
   }

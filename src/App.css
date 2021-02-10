@@ -23,7 +23,7 @@ button:focus {
   height: 18px;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #squareGreen {
@@ -37,7 +37,7 @@ button:focus {
   height: 18px;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square1 {
@@ -51,10 +51,11 @@ button:focus {
   border-bottom: none;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square2 {
@@ -67,10 +68,11 @@ button:focus {
   border-bottom: none;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square3 {
@@ -83,10 +85,11 @@ button:focus {
   border-bottom: solid;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square4 {
@@ -99,10 +102,11 @@ button:focus {
   border-bottom: none;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square5 {
@@ -115,10 +119,11 @@ button:focus {
   border-bottom: solid;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square6 {
@@ -131,10 +136,11 @@ button:focus {
   border-bottom: none;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square7 {
@@ -147,10 +153,11 @@ button:focus {
   border-bottom: none;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square8 {
@@ -163,10 +170,11 @@ button:focus {
   border-bottom: solid;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square9 {
@@ -179,10 +187,11 @@ button:focus {
   border-bottom: solid;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square10 {
@@ -195,10 +204,11 @@ button:focus {
   border-bottom: none;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square11 {
@@ -211,10 +221,11 @@ button:focus {
   border-bottom: solid;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square12 {
@@ -227,10 +238,11 @@ button:focus {
   border-bottom: solid;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square13 {
@@ -243,10 +255,11 @@ button:focus {
   border-bottom: solid;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square14 {
@@ -259,10 +272,12 @@ button:focus {
   border-bottom: none;
   border-left: solid;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 #square15 {
@@ -275,10 +290,11 @@ button:focus {
   border-bottom: none;
   border-left: none;
 
-  height: 34px;
+  height: 75px;
+  border-width: thick;
 
   text-align: center;
-  width: 34px;
+  width: 75px;
 }
 
 .App {
@@ -307,4 +323,30 @@ button:focus {
   to {
     transform: rotate(360deg);
   }
+}
+
+.b1 {
+  border: solid, solid, solid, solid;
+  background-color: white;
+  color: black;
+  padding: 0;
+
+  height: 75px;
+  border-width: thick;
+
+  text-align: center;
+  width: 75px;
+}
+
+.bplus {
+  border: solid, solid, solid, solid;
+  background-color: yellow;
+  color: black;
+  padding: 0;
+
+  height: 75px;
+  border-width: thick;
+
+  text-align: center;
+  width: 75px;
 }
