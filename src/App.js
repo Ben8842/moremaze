@@ -7,8 +7,8 @@ class Building extends Component {
     var superpath = [];
     this.state = {
       path: superpath,
-      pathX: [],
-      pathY: [],
+      pathX: [0],
+      pathY: [0],
     };
   }
 
@@ -42,35 +42,166 @@ class Building extends Component {
   pathgenerator() {
     var { pathX, pathY } = this.state;
     //new path = { ex: [0], wy: [0] };
-    var ex = [0];
-    var wy = [0];
+    var ex = pathX;
+    var wy = pathY;
     var nonpath = [];
-
+    console.log({ pathX });
+    console.log({ pathY });
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
+    console.log(pathX.length + "hi length");
     var checker = 0;
     var i = null;
-    for (i = 0; i < 1; i++) {
+    if (pathX.length == 1) {
       var chooser = randomNumber(1, 3);
+      console.log(chooser);
       if (chooser == 1) {
-        ex.push(ex[0] + 1);
-        ex.push(ex[0] + 2);
-        wy.push(wy[0]);
-        wy.push(wy[0]);
+        ex.push(1);
+        ex.push(2);
+        wy.push(0);
+        wy.push(0);
       } else if (chooser == 2) {
-        ex.push(ex[0]);
-        ex.push(ex[0]);
-        wy.push(wy[0] + 1);
-        wy.push(wy[0] + 2);
+        ex.push(0);
+        ex.push(0);
+        wy.push(1);
+        wy.push(2);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 3) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 5) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 7) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 9) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 11) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 9) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
+      } else if (chooser == 3) {
+        console.log("wall");
+      }
+    } else if (pathX.length == 9) {
+      var chooser = randomNumber(1, 3);
+      console.log(chooser);
+      if (chooser == 1) {
+        //right
+        ex.push(ex[ex.length - 1] + 1);
+        ex.push(ex[ex.length - 1] + 1);
+        wy.push(wy[wy.length - 1]);
+        wy.push(wy[wy.length - 1]);
+      } else if (chooser == 2) {
+        //down
+        ex.push(ex[ex.length - 1]);
+        ex.push(ex[ex.length - 1]);
+        wy.push(wy[wy.length - 1] + 1);
+        wy.push(wy[wy.length - 1] + 1);
       } else if (chooser == 3) {
         console.log("wall");
       }
     }
+
     this.setState((state) => {
       return { pathX: ex, pathY: wy };
     });
     console.log(ex);
+    this.forceUpdate();
   }
 
   render() {
