@@ -77,6 +77,47 @@ class Building extends Component {
     );
     console.log(directionvar + "direction?");
 
+    /* //SWITCH ATTEMPT
+    switch (pathX.length) {
+      case 1:
+        var chooser = randomNumber(1, 3);
+        if (chooser == 1) {
+          ex.push(1);
+          ex.push(2);
+          wy.push(0);
+          wy.push(0);
+        } else if (chooser == 2) {
+          ex.push(0);
+          ex.push(0);
+          wy.push(1);
+          wy.push(2);
+        }
+      default: 
+        switch (pathX[pathX.length - 1]) {
+          case 0: 
+            if (directionvar == 1) {
+               //right
+      ex.push(ex[ex.length - 1] + 1);
+      ex.push(ex[ex.length - 1] + 1);
+      wy.push(wy[wy.length - 1]);
+              wy.push(wy[wy.length - 1]);
+              break;
+            } else if (directionvar == 4) {
+               //down
+      ex.push(ex[ex.length - 1]);
+      ex.push(ex[ex.length - 1]);
+      wy.push(wy[wy.length - 1] + 1);
+              wy.push(wy[wy.length - 1] + 1);
+              break;
+            }
+            switch (pathY[pathY.length - 1] == 0)
+            case 3:
+
+              case 2:
+*/
+
+    //IF ATTEMPT
+
     if (pathX.length == 1) {
       var chooser = randomNumber(1, 3);
       //   console.log(chooser);
