@@ -18,6 +18,7 @@ class Building extends Component {
 
   renderSquare(x, y) {
     var { pathX, pathY, pathO } = this.state;
+    const viewSize = this.props.sizeValue;
     function shuffle(arry) {
       arry.sort(() => Math.random() - 0.5);
     }
@@ -32,7 +33,11 @@ class Building extends Component {
     //console.log({ rid });
     var i = null;
     for (i = 0; i < pathO.length; i++) {
-      if (x == pathO[i][0] && y == pathO[i][1]) {
+      if (x == 0 && y == 0) {
+        return <button class="green" codeX={x} codeY={y}></button>;
+      } else if (x == viewSize - 2 && y == viewSize - 2) {
+        return <button class="green" codeX={x} codeY={y}></button>;
+      } else if (x == pathO[i][0] && y == pathO[i][1]) {
         return <button class={bad} codeX={x} codeY={y}></button>;
       }
     }
@@ -53,16 +58,18 @@ class Building extends Component {
 
   morePathFinders(g) {
     var { pathO, stepback } = this.state;
+    const viewSize = this.props.sizeValue;
+    const sizeLimit = viewSize - 2;
     console.log("you are here at the new recursive adventure.  ");
     var exwy = pathO;
 
-    console.log("the Path so far is defined by : ");
-    console.log(pathO);
+    //console.log("the Path so far is defined by : ");
+    //console.log(pathO);
 
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    console.log(pathO.length + " is the length of pathO");
+    //console.log(pathO.length + " is the length of pathO");
     var mazeIndex = exwy.length;
     var zcounter = stepback;
     function pastAbsDirection(x1, x2, y1, y2) {
@@ -88,8 +95,8 @@ class Building extends Component {
       [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] - 2],
     ];
 
-    console.log("the potential moves are calculated to be:");
-    console.log(potentialMove);
+    //console.log("the potential moves are calculated to be:");
+    //console.log(potentialMove);
     //these below mark whether the potential move exists in move array
     var one = null;
     var two = null;
@@ -118,7 +125,7 @@ class Building extends Component {
         exwy[i][0] == potentialMove[1][0] &&
         exwy[i][1] == potentialMove[1][1]
       ) {
-        console.log("code here!");
+        //console.log("code here!");
         two = true;
         break;
       } else two = false;
@@ -145,49 +152,49 @@ class Building extends Component {
     var oneboard = potentialMove[0][0];
     if (
       0 <= potentialMove[0][0] &&
-      potentialMove[0][0] <= 8 &&
+      potentialMove[0][0] <= sizeLimit &&
       0 <= potentialMove[0][1] &&
-      potentialMove[0][1] <= 8
+      potentialMove[0][1] <= sizeLimit
     ) {
       oneBoard = false;
     } else oneBoard = true;
 
     if (
       0 <= potentialMove[1][0] &&
-      potentialMove[1][0] <= 8 &&
+      potentialMove[1][0] <= sizeLimit &&
       0 <= potentialMove[1][1] &&
-      potentialMove[1][1] <= 8
+      potentialMove[1][1] <= sizeLimit
     ) {
       twoBoard = false;
     } else twoBoard = true;
 
     if (
       0 <= potentialMove[2][0] &&
-      potentialMove[2][0] <= 8 &&
+      potentialMove[2][0] <= sizeLimit &&
       0 <= potentialMove[2][1] &&
-      potentialMove[2][1] <= 8
+      potentialMove[2][1] <= sizeLimit
     ) {
       threeBoard = false;
     } else threeBoard = true;
 
     if (
       0 <= potentialMove[3][0] &&
-      potentialMove[3][0] <= 8 &&
+      potentialMove[3][0] <= sizeLimit &&
       0 <= potentialMove[3][1] &&
-      potentialMove[3][1] <= 8
+      potentialMove[3][1] <= sizeLimit
     ) {
       fourBoard = false;
     } else fourBoard = true;
 
-    console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
+    //console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
 
     //console.log(one + two + three + four + oneboard);
     //  console.log(one);
     //  console.log(two);
     //  console.log(three);
     //  console.log(four);
-    console.log("and now presenting the value of exwy:");
-    console.log(exwy);
+    //console.log("and now presenting the value of exwy:");
+    //console.log(exwy);
     // console.log(potentialMove[0]);
     // console.log(potentialMove[1]);
     // console.log(potentialMove[2]);
@@ -210,19 +217,19 @@ class Building extends Component {
       actualPotentialMoves.push(potentialMove[3]);
     }
     //array of valid potential moves (unvisited and on the board) is logged below
-    console.log("the actual Potential VALID moves are: ");
-    console.log(actualPotentialMoves);
+    //console.log("the actual Potential VALID moves are: ");
+    //console.log(actualPotentialMoves);
 
     if (actualPotentialMoves.length == 0) {
       //this.morePathFinders();
       console.log("end detected AGAIN");
       //this.pathMore(2);
     } else if (pathO.length !== 1) {
-      console.log("i suppose the pathO length is NOT one");
-      console.log(pathO.length);
+      //console.log("i suppose the pathO length is NOT one");
+      //console.log(pathO.length);
       var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
-      console.log("the chooserNext chooses: ");
-      console.log(chooserNext);
+      //console.log("the chooserNext chooses: ");
+      //console.log(chooserNext);
 
       var newDir = pastAbsDirection(
         exwy[exwy.length - zcounter][0],
@@ -231,8 +238,8 @@ class Building extends Component {
         actualPotentialMoves[chooserNext - 1][1]
       );
 
-      console.log("the newDir is calculated to be:");
-      console.log(newDir);
+      //console.log("the newDir is calculated to be:");
+      //console.log(newDir);
 
       if (newDir == 3) {
         exwy.push(
@@ -267,8 +274,8 @@ class Building extends Component {
           actualPotentialMoves[chooserNext - 1]
         );
       }
-      console.log("we actually pushed new values (exwy) i hope and they are:");
-      console.log(exwy);
+      //console.log("we actually pushed new values (exwy) i hope and they are:");
+      //console.log(exwy);
     }
     if (stepback + 4 < pathO.length) {
       this.setState((state) => {
@@ -281,19 +288,32 @@ class Building extends Component {
     this.forceUpdate();
   }
 
+  pathgeneratorOrigin() {
+    //setTimeout(this.pathgenerator(), 3000);
+    // console.log("timeout hello");
+    // if (1 < 2) {
+    //   setTimeout(this.pathgenerator, 3000);
+    //   setTimeout(this.pathgeneratorOrigin, 4000);
+    // } else return;]
+    this.pathgenerator();
+    //setInterval(this.pathgenerator, 5000);
+  }
+
   pathgenerator() {
-    var { pathX, pathY, pathO, pathN } = this.state;
+    var { pathO, pathN } = this.state;
+    const viewSize = this.props.sizeValue;
+    const sizeLimit = viewSize - 2;
 
     // var ex = pathX;
     // var wy = pathY;
     var exwy = pathO;
-    console.log("the Path so far is defined by : ");
-    console.log(pathO);
+    //console.log("the Path so far is defined by : ");
+    //console.log(pathO);
 
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    console.log(pathO.length + " is the length of pathO");
+    //console.log(pathO.length + " is the length of pathO");
 
     if (pathO.length == 1) {
       var chooser = randomNumber(1, 3);
@@ -304,7 +324,7 @@ class Building extends Component {
         exwy.push([0, 1], [0, 2]);
       }
     } else {
-      console.log("not first turn!");
+      //console.log("not first turn!");
       function pastDirection(x1, x2, y1, y2) {
         if (x1 == x2 && y1 > y2) {
           return 1;
@@ -333,8 +353,8 @@ class Building extends Component {
         [exwy[exwy.length - 1][0], exwy[exwy.length - 1][1] + 2],
         [exwy[exwy.length - 1][0], exwy[exwy.length - 1][1] - 2],
       ];
-      console.log("the potential moves are calculated to be:");
-      console.log(potentialMove);
+      //console.log("the potential moves are calculated to be:");
+      //console.log(potentialMove);
       //these below mark whether the potential move exists in move array
       var one = null;
       var two = null;
@@ -363,7 +383,7 @@ class Building extends Component {
           exwy[i][0] == potentialMove[1][0] &&
           exwy[i][1] == potentialMove[1][1]
         ) {
-          console.log("code here!");
+          //console.log("code here!");
           two = true;
           break;
         } else two = false;
@@ -390,49 +410,49 @@ class Building extends Component {
       var oneboard = potentialMove[0][0];
       if (
         0 <= potentialMove[0][0] &&
-        potentialMove[0][0] <= 8 &&
+        potentialMove[0][0] <= sizeLimit &&
         0 <= potentialMove[0][1] &&
-        potentialMove[0][1] <= 8
+        potentialMove[0][1] <= sizeLimit
       ) {
         oneBoard = false;
       } else oneBoard = true;
 
       if (
         0 <= potentialMove[1][0] &&
-        potentialMove[1][0] <= 8 &&
+        potentialMove[1][0] <= sizeLimit &&
         0 <= potentialMove[1][1] &&
-        potentialMove[1][1] <= 8
+        potentialMove[1][1] <= sizeLimit
       ) {
         twoBoard = false;
       } else twoBoard = true;
 
       if (
         0 <= potentialMove[2][0] &&
-        potentialMove[2][0] <= 8 &&
+        potentialMove[2][0] <= sizeLimit &&
         0 <= potentialMove[2][1] &&
-        potentialMove[2][1] <= 8
+        potentialMove[2][1] <= sizeLimit
       ) {
         threeBoard = false;
       } else threeBoard = true;
 
       if (
         0 <= potentialMove[3][0] &&
-        potentialMove[3][0] <= 8 &&
+        potentialMove[3][0] <= sizeLimit &&
         0 <= potentialMove[3][1] &&
-        potentialMove[3][1] <= 8
+        potentialMove[3][1] <= sizeLimit
       ) {
         fourBoard = false;
       } else fourBoard = true;
 
-      console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
+      //console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
 
       //console.log(one + two + three + four + oneboard);
       //  console.log(one);
       //  console.log(two);
       //  console.log(three);
       //  console.log(four);
-      console.log("and now presenting the value of exwy:");
-      console.log(exwy);
+      //console.log("and now presenting the value of exwy:");
+      //console.log(exwy);
       // console.log(potentialMove[0]);
       // console.log(potentialMove[1]);
       // console.log(potentialMove[2]);
@@ -455,19 +475,19 @@ class Building extends Component {
         actualPotentialMoves.push(potentialMove[3]);
       }
       //array of valid potential moves (unvisited and on the board) is logged below
-      console.log("the actual Potential VALID moves are: ");
-      console.log(actualPotentialMoves);
+      //console.log("the actual Potential VALID moves are: ");
+      //console.log(actualPotentialMoves);
 
       if (actualPotentialMoves.length == 0) {
         this.morePathFinders();
         console.log("end detected");
         //this.pathMore(exwy[exwy.length - 2])
       } else if (pathO.length !== 1) {
-        console.log("i suppose the pathO length is NOT one");
-        console.log(pathO.length);
+        //console.log("i suppose the pathO length is NOT one");
+        //console.log(pathO.length);
         var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
-        console.log("the chooserNext chooses: ");
-        console.log(chooserNext);
+        //console.log("the chooserNext chooses: ");
+        //console.log(chooserNext);
 
         var newDir = pastDirection(
           exwy[exwy.length - 1][0],
@@ -476,8 +496,8 @@ class Building extends Component {
           actualPotentialMoves[chooserNext - 1][1]
         );
 
-        console.log("the newDir is calculated to be:");
-        console.log(newDir);
+        //console.log("the newDir is calculated to be:");
+        //console.log(newDir);
 
         if (newDir == 3) {
           exwy.push(
@@ -512,10 +532,10 @@ class Building extends Component {
             actualPotentialMoves[chooserNext - 1]
           );
         }
-        console.log(
+        /*console.log(
           "we actually pushed new values (exwy) i hope and they are:"
-        );
-        console.log(exwy);
+        );*/
+        //console.log(exwy);
       }
 
       //invoke this somehow. .  .
@@ -801,6 +821,7 @@ class Building extends Component {
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
+    const sizeLimit = viewSize - 2;
 
     var x;
     var y;
@@ -821,14 +842,14 @@ class Building extends Component {
     }
     return (
       <div className="entireThing">
+        <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
+          Click to generate path
+        </button>
         <div>
           {elementZ.map((value, index) => {
             return <span key={index}>{value}</span>;
           })}
         </div>
-        <button onClick={() => this.pathgenerator()}>
-          Click to generate path
-        </button>
       </div>
     );
   }
@@ -838,13 +859,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 10,
+      count: 20,
     };
   }
   enterCount() {
-    console.log("hello");
+    //console.log("hello");
     var zvalue = document.getElementById("sizeHere").value;
-    console.log(zvalue);
+    //console.log(zvalue);
     this.setState((state) => {
       return { count: zvalue };
     });
@@ -856,10 +877,10 @@ class App extends Component {
     const inputBox = (
       <div>
         <form>
-          <input type="number" class="button" id="sizeHere"></input>
+          <input class="largebutton" type="number" id="sizeHere"></input>
           <button
             type="button"
-            class="button"
+            class="largebutton"
             onClick={() => this.enterCount()}
           >
             ENTER

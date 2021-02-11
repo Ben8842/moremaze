@@ -1,12 +1,14 @@
 .HeaderSpot {
   margin: 50px;
-
+  background-color: black;
   border-color: black;
   border: solid;
 }
 
 .entireThing {
   margin: 50px;
+  background-color: black;
+  text-align: center;
 }
 
 button:focus {
@@ -326,27 +328,52 @@ button:focus {
 }
 
 .b1 {
-  border: solid, solid, solid, solid;
-  background-color: white;
-  color: black;
-  padding: 0;
-
-  height: 75px;
-  border-width: thick;
-
-  text-align: center;
-  width: 75px;
-}
-
-.bplus {
-  border: solid, solid, solid, solid;
+  border: none;
   background-color: black;
   color: black;
   padding: 0;
 
   height: 75px;
-  border-width: thick;
-
+  margin: -4px;
   text-align: center;
   width: 75px;
+}
+
+.bplus {
+  border: none;
+  background-color: white;
+  color: black;
+  padding: 0;
+  height: 75px;
+  margin: -4px;
+  text-align: center;
+  width: 75px;
+}
+
+.green {
+  border: none;
+  background-color: lightgreen;
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+#largebutton {
+  height: 200px;
+  width: 400px;
+  font-size: 50px;
+  font-weight: bold;
+  background-color: rgb(0, 255, 255);
+}
+
+.largebutton {
+  height: 90px;
+  width: 250px;
+  font-size: 50px;
+  font-weight: bold;
+  background-color: rgb(0, 255, 255);
 }
