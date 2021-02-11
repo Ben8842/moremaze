@@ -104,10 +104,16 @@ class Building extends Component {
       [ex[ex.length - 1], wy[wy.length - 1] + 1],
       [ex[ex.length - 1], wy[wy.length - 1] - 1],
     ];
+    //these below mark whether the potential move exists in move array
     var one = null;
     var two = null;
     var three = null;
     var four = null;
+    //these below mark whether the potential move is on the board
+    var oneBoard = null;
+    var twoBoard = null;
+    var threeBoard = null;
+    var fourBoard = null;
     var u = 0;
     var i = 0;
     var p = 0;
@@ -151,6 +157,43 @@ class Building extends Component {
     }
 
     var oneboard = potentialMove[0][0];
+    if (
+      0 <= potentialMove[0][0] &&
+      potentialMove[0][0] <= 8 &&
+      0 <= potentialMove[0][1] &&
+      potentialMove[0][1] <= 8
+    ) {
+      oneBoard = false;
+    } else oneBoard = true;
+
+    if (
+      0 <= potentialMove[1][0] &&
+      potentialMove[1][0] <= 8 &&
+      0 <= potentialMove[1][1] &&
+      potentialMove[1][1] <= 8
+    ) {
+      twoBoard = false;
+    } else twoBoard = true;
+
+    if (
+      0 <= potentialMove[2][0] &&
+      potentialMove[2][0] <= 8 &&
+      0 <= potentialMove[2][1] &&
+      potentialMove[2][1] <= 8
+    ) {
+      threeBoard = false;
+    } else threeBoard = true;
+
+    if (
+      0 <= potentialMove[3][0] &&
+      potentialMove[3][0] <= 8 &&
+      0 <= potentialMove[3][1] &&
+      potentialMove[3][1] <= 8
+    ) {
+      fourBoard = false;
+    } else fourBoard = true;
+
+    console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
 
     //console.log(one + two + three + four + oneboard);
     console.log(one);
@@ -164,8 +207,24 @@ class Building extends Component {
     console.log(potentialMove[2]);
     console.log(potentialMove[3]);
 
-    console.log(exwy[1][0] == potentialMove[1][0]);
+    console.log(0 <= potentialMove[1][0]);
     console.log(exwy[1][1] == potentialMove[1][1]);
+
+    var actualPotentialMoves = [];
+    if (one == false && oneBoard == false) {
+      actualPotentialMoves.push(potentialMove[0]);
+    }
+    if (two == false && twoBoard == false) {
+      actualPotentialMoves.push(potentialMove[1]);
+    }
+    if (three == false && threeBoard == false) {
+      actualPotentialMoves.push(potentialMove[2]);
+    }
+    if (four == false && fourBoard == false) {
+      actualPotentialMoves.push(potentialMove[3]);
+    }
+    //array of valid potential moves (unvisited and on the board) is logged below
+    console.log(actualPotentialMoves);
 
     //invoke this somehow. .  .
     //this.fourMoveCalculator(ex, wy);
