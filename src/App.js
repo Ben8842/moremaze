@@ -9,6 +9,8 @@ class Building extends Component {
       path: superpath,
       pathX: [0],
       pathY: [0],
+      pathO: [[0, 0]],
+      pathN: [0],
     };
   }
 
@@ -40,10 +42,11 @@ class Building extends Component {
   }
 
   pathgenerator() {
-    var { pathX, pathY } = this.state;
+    var { pathX, pathY, pathO, pathN } = this.state;
     //new path = { ex: [0], wy: [0] };
     var ex = pathX;
     var wy = pathY;
+    var exwy = pathO;
     var nonpath = [];
     //  console.log({ pathX });
     //  console.log({ pathY });
@@ -51,7 +54,123 @@ class Building extends Component {
       return Math.floor(Math.random() * (max - min)) + min;
     }
     console.log(pathX.length + "hi length");
-    var checker = 0;
+
+    if (pathX.length == 1) {
+      var chooser = randomNumber(1, 3);
+      //   console.log(chooser);
+      if (chooser == 1) {
+        ex.push(1);
+        ex.push(2);
+        wy.push(0);
+        wy.push(0);
+        exwy.push([1, 0], [2, 0]);
+      } else if (chooser == 2) {
+        ex.push(0);
+        ex.push(0);
+        wy.push(1);
+        wy.push(2);
+        exwy.push([0, 1], [0, 2]);
+      }
+    }
+    console.log("not first turn!");
+    function pastDirection(x1, x2, y1, y2) {
+      if (x1 == x2 && y1 > y2) {
+        return 1;
+        //down
+      } else if (x1 == x2 && y1 < y2) {
+        return 2;
+        //up
+      } else if (x1 > x2 && y1 == y2) {
+        return 3;
+        //right
+      } else if (x1 < x2 && y1 == y2) {
+        return 4;
+        //left
+      }
+    }
+    var directionvar = pastDirection(
+      pathX[pathX.length - 1],
+      pathX[pathX.length - 2],
+      pathY[pathY.length - 1],
+      pathY[pathY.length - 2]
+    );
+    console.log(directionvar + "direction?");
+
+    var visitedbefore = false;
+    var offTheBoard = false;
+    var potentialMove = [
+      [ex[ex.length - 1] + 1, wy[wy.length - 1]],
+      [ex[ex.length - 1] - 1, wy[wy.length - 1]],
+      [ex[ex.length - 1], wy[wy.length - 1] + 1],
+      [ex[ex.length - 1], wy[wy.length - 1] - 1],
+    ];
+    var one = null;
+    var two = null;
+    var three = null;
+    var four = null;
+    var u = 0;
+    var i = 0;
+    var p = 0;
+    var k = 0;
+    for (u = 0; u < exwy.length; u++) {
+      if (
+        exwy[u][0] == potentialMove[0][0] &&
+        exwy[u][1] == potentialMove[0][1]
+      ) {
+        one = true;
+        break;
+      } else one = false;
+    }
+    for (i = 0; i < exwy.length; i++) {
+      if (
+        exwy[i][0] == potentialMove[1][0] &&
+        exwy[i][1] == potentialMove[1][1]
+      ) {
+        console.log("code here!");
+        two = true;
+        break;
+      } else two = false;
+    }
+    for (p = 0; p < exwy.length; p++) {
+      if (
+        exwy[p][0] == potentialMove[2][0] &&
+        exwy[p][1] == potentialMove[2][1]
+      ) {
+        three = true;
+        break;
+      } else three = false;
+    }
+    for (k = 0; k < exwy.length; k++) {
+      if (
+        exwy[k][0] == potentialMove[3][0] &&
+        exwy[k][1] == potentialMove[3][1]
+      ) {
+        four = true;
+        break;
+      } else four = false;
+    }
+
+    var oneboard = potentialMove[0][0];
+
+    //console.log(one + two + three + four + oneboard);
+    console.log(one);
+    console.log(two);
+    console.log(three);
+    console.log(four);
+
+    console.log(exwy);
+    console.log(potentialMove[0]);
+    console.log(potentialMove[1]);
+    console.log(potentialMove[2]);
+    console.log(potentialMove[3]);
+
+    console.log(exwy[1][0] == potentialMove[1][0]);
+    console.log(exwy[1][1] == potentialMove[1][1]);
+
+    //invoke this somehow. .  .
+    //this.fourMoveCalculator(ex, wy);
+
+    /* var checker = 0;
     var i = null;
 
     function pastDirection(x1, x2, y1, y2) {
@@ -117,7 +236,7 @@ class Building extends Component {
 */
 
     //IF ATTEMPT
-
+    /*
     if (pathX.length == 1) {
       var chooser = randomNumber(1, 3);
       //   console.log(chooser);
@@ -317,9 +436,10 @@ class Building extends Component {
         console.log("wall");
       }
     }
+    */
 
     this.setState((state) => {
-      return { pathX: ex, pathY: wy };
+      return { pathX: ex, pathY: wy, pathO: exwy };
     });
     //  console.log(ex);
     this.forceUpdate();
