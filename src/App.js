@@ -229,15 +229,15 @@ class Building extends Component {
       if (pathO.length !== 1) {
         console.log("i suppose the pathO length is NOT one");
         console.log(pathO.length);
-        var chooserNext = randomNumber(1, actualPotentialMoves.length);
+        var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
         console.log("the chooserNext chooses: ");
         console.log(chooserNext);
 
         var newDir = pastDirection(
           exwy[exwy.length - 1][0],
-          actualPotentialMoves[chooserNext][0],
+          actualPotentialMoves[chooserNext - 1][0],
           exwy[exwy.length - 1][1],
-          actualPotentialMoves[chooserNext][1]
+          actualPotentialMoves[chooserNext - 1][1]
         );
 
         console.log("the newDir is calculated to be:");
@@ -246,34 +246,34 @@ class Building extends Component {
         if (newDir == 3) {
           exwy.push(
             [
-              actualPotentialMoves[chooserNext][0] + 1,
-              actualPotentialMoves[chooserNext][0],
+              actualPotentialMoves[chooserNext - 1][0] + 1,
+              actualPotentialMoves[chooserNext - 1][1],
             ],
-            actualPotentialMoves[chooserNext]
+            actualPotentialMoves[chooserNext - 1]
           );
         } else if (newDir == 4) {
           exwy.push(
             [
-              actualPotentialMoves[chooserNext][0] - 1,
-              actualPotentialMoves[chooserNext][0],
+              actualPotentialMoves[chooserNext - 1][0] - 1,
+              actualPotentialMoves[chooserNext - 1][1],
             ],
-            actualPotentialMoves[chooserNext]
+            actualPotentialMoves[chooserNext - 1]
           );
         } else if (newDir == 1) {
           exwy.push(
             [
-              actualPotentialMoves[chooserNext][0],
-              actualPotentialMoves[chooserNext][0] - 1,
+              actualPotentialMoves[chooserNext - 1][0],
+              actualPotentialMoves[chooserNext - 1][1] + 1,
             ],
-            actualPotentialMoves[chooserNext]
+            actualPotentialMoves[chooserNext - 1]
           );
         } else if (newDir == 2) {
           exwy.push(
             [
-              actualPotentialMoves[chooserNext][0],
-              actualPotentialMoves[chooserNext][0] + 1,
+              actualPotentialMoves[chooserNext - 1][0],
+              actualPotentialMoves[chooserNext - 1][1] - 1,
             ],
-            actualPotentialMoves[chooserNext]
+            actualPotentialMoves[chooserNext - 1]
           );
         }
         console.log(
