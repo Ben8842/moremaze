@@ -11,6 +11,8 @@ class Building extends Component {
       pathY: [0],
       pathO: [[0, 0]],
       pathN: [0],
+      stepback: 3,
+      mazeBuildDone: false,
     };
   }
 
@@ -41,8 +43,16 @@ class Building extends Component {
     return <button id="squareGreen" codeX={x} codeY={y}></button>;
   }
 
+  incrementStepback() {
+    this.setState((state) => {
+      if (state.stepback < state.pathO.length) {
+        return { stepback: state.stepback + 2 };
+      } else return { mazeBuildDone: true };
+    });
+  }
+
   morePathFinders(g) {
-    var { pathO } = this.state;
+    var { pathO, stepback } = this.state;
     console.log("you are here at the new recursive adventure.  ");
     var exwy = pathO;
 
@@ -54,7 +64,7 @@ class Building extends Component {
     }
     console.log(pathO.length + " is the length of pathO");
     var mazeIndex = exwy.length;
-    var zcounter = 3;
+    var zcounter = stepback;
     function pastAbsDirection(x1, x2, y1, y2) {
       if (x1 == x2 && y1 > y2) {
         return 1;
@@ -260,10 +270,13 @@ class Building extends Component {
       console.log("we actually pushed new values (exwy) i hope and they are:");
       console.log(exwy);
     }
-
-    this.setState((state) => {
-      return { pathO: exwy };
-    });
+    if (stepback + 4 < pathO.length) {
+      this.setState((state) => {
+        return { pathO: exwy, stepback: state.stepback + 2 };
+      });
+    } else {
+      console.log("I really think this maze is complete now");
+    }
     //  console.log(ex);
     this.forceUpdate();
   }
