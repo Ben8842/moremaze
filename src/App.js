@@ -12,12 +12,12 @@ class Building extends Component {
       pathO: [[0, 0]],
       pathN: [0],
       stepback: 3,
-      mazeBuildDone: false,
+      complete: false,
     };
   }
 
   renderSquare(x, y) {
-    var { pathX, pathY, pathO } = this.state;
+    var { pathX, pathY, pathO, stepback } = this.state;
     const viewSize = this.props.sizeValue;
     function shuffle(arry) {
       arry.sort(() => Math.random() - 0.5);
@@ -37,6 +37,17 @@ class Building extends Component {
         return <button class="green" codeX={x} codeY={y}></button>;
       } else if (x == viewSize - 2 && y == viewSize - 2) {
         return <button class="green" codeX={x} codeY={y}></button>;
+      } else if (
+        x == pathO[pathO.length - 1][0] &&
+        y == pathO[pathO.length - 1][1]
+      ) {
+        return <button class="blue" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[pathO.length - stepback < 0 ? 0 : pathO.length - stepback][0] &&
+        y == pathO[pathO.length - stepback < 0 ? 0 : pathO.length - stepback][1]
+      ) {
+        return <button class="orange" codeX={x} codeY={y}></button>;
       } else if (x == pathO[i][0] && y == pathO[i][1]) {
         return <button class={bad} codeX={x} codeY={y}></button>;
       }
@@ -111,6 +122,7 @@ class Building extends Component {
     var i = 0;
     var p = 0;
     var k = 0;
+    // console.log(exwy);
     for (u = 0; u < exwy.length; u++) {
       if (
         exwy[u][0] == potentialMove[0][0] &&
@@ -277,26 +289,21 @@ class Building extends Component {
       //console.log("we actually pushed new values (exwy) i hope and they are:");
       //console.log(exwy);
     }
-    if (stepback + 4 < pathO.length) {
+    if (stepback < pathO.length) {
       this.setState((state) => {
         return { pathO: exwy, stepback: state.stepback + 2 };
       });
     } else {
-      console.log("I really think this maze is complete now");
+      console.log("end detected");
+      clearInterval(this.state.interval);
     }
     //  console.log(ex);
     this.forceUpdate();
   }
 
   pathgeneratorOrigin() {
-    //setTimeout(this.pathgenerator(), 3000);
-    // console.log("timeout hello");
-    // if (1 < 2) {
-    //   setTimeout(this.pathgenerator, 3000);
-    //   setTimeout(this.pathgeneratorOrigin, 4000);
-    // } else return;]
-    this.pathgenerator();
-    //setInterval(this.pathgenerator, 5000);
+    var interval = setInterval(this.pathgenerator.bind(this), 25);
+    this.setState({ interval: interval });
   }
 
   pathgenerator() {
@@ -483,6 +490,7 @@ class Building extends Component {
         console.log("end detected");
         //this.pathMore(exwy[exwy.length - 2])
       } else if (pathO.length !== 1) {
+        this.state.stepback = 3;
         //console.log("i suppose the pathO length is NOT one");
         //console.log(pathO.length);
         var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);

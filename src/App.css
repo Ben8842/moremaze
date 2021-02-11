@@ -377,3 +377,39 @@ button:focus {
   font-weight: bold;
   background-color: rgb(0, 255, 255);
 }
+
+.orange {
+  border: none;
+  background-color: orange;
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.lightorange {
+  border: none;
+  background-color: rgb(250, 218, 158);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.blue {
+  border: none;
+  background-color: blue;
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
