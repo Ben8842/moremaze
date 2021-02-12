@@ -363,10 +363,12 @@ button:focus {
 }
 
 #largebutton {
-  height: 200px;
-  width: 400px;
-  font-size: 50px;
+  height: 70px;
+  width: 250px;
+  font-size: 35px;
   font-weight: bold;
+  margin: 75px;
+  padding: 10;
   background-color: rgb(0, 255, 255);
 }
 

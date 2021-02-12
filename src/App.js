@@ -55,23 +55,11 @@ class Building extends Component {
     return <button class={bid} codeX={x} codeY={y}></button>;
   }
 
-  renderGreen(x, y) {
-    return <button id="squareGreen" codeX={x} codeY={y}></button>;
-  }
-
-  incrementStepback() {
-    this.setState((state) => {
-      if (state.stepback < state.pathO.length) {
-        return { stepback: state.stepback + 2 };
-      } else return { mazeBuildDone: true };
-    });
-  }
-
   morePathFinders(g) {
     var { pathO, stepback } = this.state;
     const viewSize = this.props.sizeValue;
     const sizeLimit = viewSize - 2;
-    console.log("you are here at the new recursive adventure.  ");
+    // console.log("you are here at the new recursive adventure.  ");
     var exwy = pathO;
 
     //console.log("the Path so far is defined by : ");
@@ -198,23 +186,6 @@ class Building extends Component {
       fourBoard = false;
     } else fourBoard = true;
 
-    //console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
-
-    //console.log(one + two + three + four + oneboard);
-    //  console.log(one);
-    //  console.log(two);
-    //  console.log(three);
-    //  console.log(four);
-    //console.log("and now presenting the value of exwy:");
-    //console.log(exwy);
-    // console.log(potentialMove[0]);
-    // console.log(potentialMove[1]);
-    // console.log(potentialMove[2]);
-    // console.log(potentialMove[3]);
-
-    // console.log(0 <= potentialMove[1][0]);
-    // console.log(exwy[1][1] == potentialMove[1][1]);
-
     var actualPotentialMoves = [];
     if (one == false && oneBoard == false) {
       actualPotentialMoves.push(potentialMove[0]);
@@ -234,7 +205,7 @@ class Building extends Component {
 
     if (actualPotentialMoves.length == 0) {
       //this.morePathFinders();
-      console.log("end detected AGAIN");
+      //  console.log("end detected AGAIN");
       //this.pathMore(2);
     } else if (pathO.length !== 1) {
       //console.log("i suppose the pathO length is NOT one");
@@ -294,7 +265,7 @@ class Building extends Component {
         return { pathO: exwy, stepback: state.stepback + 2 };
       });
     } else {
-      console.log("end detected");
+      //   console.log("end detected");
       clearInterval(this.state.interval);
     }
     //  console.log(ex);
@@ -347,13 +318,7 @@ class Building extends Component {
           //right
         }
       }
-      /* var directionvar = pastDirection(
-        pathX[pathX.length - 1],
-        pathX[pathX.length - 2],
-        pathY[pathY.length - 1],
-        pathY[pathY.length - 2]
-      );*/
-      //console.log(directionvar + "direction?");
+
       var potentialMove = [
         [exwy[exwy.length - 1][0] + 2, exwy[exwy.length - 1][1]],
         [exwy[exwy.length - 1][0] - 2, exwy[exwy.length - 1][1]],
@@ -390,7 +355,6 @@ class Building extends Component {
           exwy[i][0] == potentialMove[1][0] &&
           exwy[i][1] == potentialMove[1][1]
         ) {
-          //console.log("code here!");
           two = true;
           break;
         } else two = false;
@@ -451,22 +415,8 @@ class Building extends Component {
         fourBoard = false;
       } else fourBoard = true;
 
-      //console.log("board" + oneBoard + twoBoard + threeBoard + fourBoard);
-
-      //console.log(one + two + three + four + oneboard);
-      //  console.log(one);
-      //  console.log(two);
-      //  console.log(three);
-      //  console.log(four);
       //console.log("and now presenting the value of exwy:");
       //console.log(exwy);
-      // console.log(potentialMove[0]);
-      // console.log(potentialMove[1]);
-      // console.log(potentialMove[2]);
-      // console.log(potentialMove[3]);
-
-      // console.log(0 <= potentialMove[1][0]);
-      // console.log(exwy[1][1] == potentialMove[1][1]);
 
       var actualPotentialMoves = [];
       if (one == false && oneBoard == false) {
@@ -487,12 +437,11 @@ class Building extends Component {
 
       if (actualPotentialMoves.length == 0) {
         this.morePathFinders();
-        console.log("end detected");
+        //     console.log("end detected");
         //this.pathMore(exwy[exwy.length - 2])
       } else if (pathO.length !== 1) {
         this.state.stepback = 3;
-        //console.log("i suppose the pathO length is NOT one");
-        //console.log(pathO.length);
+
         var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
         //console.log("the chooserNext chooses: ");
         //console.log(chooserNext);
@@ -540,288 +489,12 @@ class Building extends Component {
             actualPotentialMoves[chooserNext - 1]
           );
         }
-        /*console.log(
-          "we actually pushed new values (exwy) i hope and they are:"
-        );*/
-        //console.log(exwy);
       }
-
-      //invoke this somehow. .  .
-      //this.fourMoveCalculator(ex, wy);
-
-      /* var checker = 0;
-      var i = null;
-  
-      function pastDirection(x1, x2, y1, y2) {
-        if (x1 == x2 && y1 > y2) {
-          return 1;
-          //down
-        } else if (x1 == x2 && y1 < y2) {
-          return 2;
-          //up
-        } else if (x1 > x2 && y1 == y2) {
-          return 3;
-          //right
-        } else if (x1 < x2 && y1 == y2) {
-          return 4;
-          //left
-        }
-      }
-      var directionvar = pastDirection(
-        pathX[pathX.length - 1],
-        pathX[pathX.length - 2],
-        pathY[pathY.length - 1],
-        pathY[pathY.length - 2]
-      );
-      console.log(directionvar + "direction?");
-  
-      /* //SWITCH ATTEMPT
-      switch (pathX.length) {
-        case 1:
-          var chooser = randomNumber(1, 3);
-          if (chooser == 1) {
-            ex.push(1);
-            ex.push(2);
-            wy.push(0);
-            wy.push(0);
-          } else if (chooser == 2) {
-            ex.push(0);
-            ex.push(0);
-            wy.push(1);
-            wy.push(2);
-          }
-        default: 
-          switch (pathX[pathX.length - 1]) {
-            case 0: 
-              if (directionvar == 1) {
-                 //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-                wy.push(wy[wy.length - 1]);
-                break;
-              } else if (directionvar == 4) {
-                 //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-                wy.push(wy[wy.length - 1] + 1);
-                break;
-              }
-              switch (pathY[pathY.length - 1] == 0)
-              case 3:
-  
-                case 2:
-  */
-
-      //IF ATTEMPT
-      /*
-      if (pathX.length == 1) {
-        var chooser = randomNumber(1, 3);
-        //   console.log(chooser);
-        if (chooser == 1) {
-          ex.push(1);
-          ex.push(2);
-          wy.push(0);
-          wy.push(0);
-        } else if (chooser == 2) {
-          ex.push(0);
-          ex.push(0);
-          wy.push(1);
-          wy.push(2);
-        } else if (chooser == 3) {
-          //  console.log("wall");
-        }
-      } else if (pathX[pathX.length - 1] == 0 && directionvar == 1) {
-        console.log("fun");
-        //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-        wy.push(wy[wy.length - 1]);
-      } else if (pathX[pathX.length - 1] == 0 && directionvar == 4) {
-        console.log("more fun");
-        //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-        wy.push(wy[wy.length - 1] + 1);
-      } else if (pathY[pathY.length - 1] == 0 && directionvar == 3) {
-        console.log("more fun");
-        //down
-        ex.push(ex[ex.length - 1]);
-        ex.push(ex[ex.length - 1]);
-        wy.push(wy[wy.length - 1] + 1);
-        wy.push(wy[wy.length - 1] + 1);
-      } else if (pathY[pathY.length - 1] == 0 && directionvar == 2) {
-        console.log("fun");
-        //right
-        ex.push(ex[ex.length - 1] + 1);
-        ex.push(ex[ex.length - 1] + 1);
-        wy.push(wy[wy.length - 1]);
-        wy.push(wy[wy.length - 1]);
-      } else if (
-        pathX.length >= 3 &&
-        pathX[pathX.length - 1] < 8 &&
-        pathY[pathY.length - 1] < 8 &&
-        directionvar == 2 &&
-        pathX[pathX.length - 1] > 0 &&
-        pathY[pathY.length - 1] > 0
-        //down detection
-      ) {
-        var chooser = randomNumber(1, 4);
-        //  console.log(chooser);
-        if (chooser == 1) {
-          //right
-          ex.push(ex[ex.length - 1] + 1);
-          ex.push(ex[ex.length - 1] + 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        } else if (chooser == 2) {
-          //down
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] + 1);
-          wy.push(wy[wy.length - 1] + 1);
-        } else if (chooser == 3) {
-          console.log("special");
-          //left
-          ex.push(ex[ex.length - 1] - 1);
-          ex.push(ex[ex.length - 1] - 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        }
-      } else if (
-        pathX.length >= 3 &&
-        pathX[pathX.length - 1] < 8 &&
-        pathY[pathY.length - 1] < 8 &&
-        directionvar == 1
-        //up detection
-      ) {
-        var chooser = randomNumber(1, 4);
-        //  console.log(chooser);
-        if (chooser == 1) {
-          //right
-          ex.push(ex[ex.length - 1] + 1);
-          ex.push(ex[ex.length - 1] + 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        } else if (chooser == 2) {
-          //up
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] - 1);
-          wy.push(wy[wy.length - 1] - 1);
-        } else if (chooser == 3) {
-          console.log("special");
-          //left
-          ex.push(ex[ex.length - 1] - 1);
-          ex.push(ex[ex.length - 1] - 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        }
-      } else if (
-        pathX.length >= 3 &&
-        pathX[pathX.length - 1] < 8 &&
-        pathY[pathY.length - 1] < 8 &&
-        directionvar == 3
-        //right detection
-      ) {
-        var chooser = randomNumber(1, 4);
-        //    console.log(chooser);
-        if (chooser == 1) {
-          //right
-          ex.push(ex[ex.length - 1] + 1);
-          ex.push(ex[ex.length - 1] + 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        } else if (chooser == 2) {
-          //up
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] - 1);
-          wy.push(wy[wy.length - 1] - 1);
-        } else if (chooser == 3) {
-          console.log("special");
-          //down
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] + 1);
-          wy.push(wy[wy.length - 1] + 1);
-        }
-      } else if (
-        pathX.length >= 3 &&
-        pathX[pathX.length - 1] < 8 &&
-        pathY[pathY.length - 1] < 8 &&
-        directionvar == 4
-        //left detection
-      ) {
-        var chooser = randomNumber(1, 4);
-        //    console.log(chooser);
-        if (chooser == 1) {
-          //left
-          ex.push(ex[ex.length - 1] - 1);
-          ex.push(ex[ex.length - 1] - 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        } else if (chooser == 2) {
-          //up
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] - 1);
-          wy.push(wy[wy.length - 1] - 1);
-        } else if (chooser == 3) {
-          console.log("special");
-          //down
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] + 1);
-          wy.push(wy[wy.length - 1] + 1);
-        }
-      } else if (pathX.length == 20) {
-        var chooser = randomNumber(1, 3);
-        //    console.log(chooser);
-        if (chooser == 1) {
-          //right
-          ex.push(ex[ex.length - 1] + 1);
-          ex.push(ex[ex.length - 1] + 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        } else if (chooser == 2) {
-          //down
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] + 1);
-          wy.push(wy[wy.length - 1] + 1);
-        } else if (chooser == 3) {
-          //     console.log("wall");
-        }
-      } else if (pathX.length == 21) {
-        var chooser = randomNumber(1, 3);
-        console.log(chooser);
-        if (chooser == 1) {
-          //right
-          ex.push(ex[ex.length - 1] + 1);
-          ex.push(ex[ex.length - 1] + 1);
-          wy.push(wy[wy.length - 1]);
-          wy.push(wy[wy.length - 1]);
-        } else if (chooser == 2) {
-          //down
-          ex.push(ex[ex.length - 1]);
-          ex.push(ex[ex.length - 1]);
-          wy.push(wy[wy.length - 1] + 1);
-          wy.push(wy[wy.length - 1] + 1);
-        } else if (chooser == 3) {
-          console.log("wall");
-        }
-      }
-      */
     }
 
     this.setState((state) => {
       return { pathO: exwy };
     });
-    //  console.log(ex);
     this.forceUpdate();
   }
 
@@ -851,8 +524,9 @@ class Building extends Component {
     return (
       <div className="entireThing">
         <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
-          Click to generate path
+          Click to Start
         </button>
+
         <div>
           {elementZ.map((value, index) => {
             return <span key={index}>{value}</span>;
