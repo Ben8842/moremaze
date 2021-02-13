@@ -6,18 +6,14 @@ class Building extends Component {
     super(props);
     var superpath = [];
     this.state = {
-      path: superpath,
-      pathX: [0],
-      pathY: [0],
       pathO: [[0, 0]],
-      pathN: [0],
       stepback: 3,
       complete: false,
     };
   }
 
   renderSquare(x, y) {
-    var { pathX, pathY, pathO, stepback } = this.state;
+    var { pathO, stepback } = this.state;
     const viewSize = this.props.sizeValue;
     function shuffle(arry) {
       arry.sort(() => Math.random() - 0.5);
@@ -26,11 +22,10 @@ class Building extends Component {
       return Math.floor(Math.random() * (max - min)) + min;
     }
     var z = randomNumber(1, 15);
-    //console.log("square" + z);
-    var rid = "square" + z;
+
     var bid = "b1";
     var bad = "bplus";
-    //console.log({ rid });
+
     var i = null;
     for (i = 0; i < pathO.length; i++) {
       if (x == 0 && y == 0) {
@@ -55,21 +50,16 @@ class Building extends Component {
     return <button class={bid} codeX={x} codeY={y}></button>;
   }
 
-  morePathFinders(g) {
+  morePathFinders() {
     var { pathO, stepback } = this.state;
     const viewSize = this.props.sizeValue;
     const sizeLimit = viewSize - 2;
-    // console.log("you are here at the new recursive adventure.  ");
     var exwy = pathO;
-
-    //console.log("the Path so far is defined by : ");
-    //console.log(pathO);
 
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    //console.log(pathO.length + " is the length of pathO");
-    var mazeIndex = exwy.length;
+
     var zcounter = stepback;
     function pastAbsDirection(x1, x2, y1, y2) {
       if (x1 == x2 && y1 > y2) {
@@ -94,9 +84,7 @@ class Building extends Component {
       [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] - 2],
     ];
 
-    //console.log("the potential moves are calculated to be:");
-    //console.log(potentialMove);
-    //these below mark whether the potential move exists in move array
+    //these flags below mark whether the potential move exists in move array
     var one = null;
     var two = null;
     var three = null;
@@ -110,7 +98,7 @@ class Building extends Component {
     var i = 0;
     var p = 0;
     var k = 0;
-    // console.log(exwy);
+
     for (u = 0; u < exwy.length; u++) {
       if (
         exwy[u][0] == potentialMove[0][0] &&
@@ -125,7 +113,6 @@ class Building extends Component {
         exwy[i][0] == potentialMove[1][0] &&
         exwy[i][1] == potentialMove[1][1]
       ) {
-        //console.log("code here!");
         two = true;
         break;
       } else two = false;
@@ -149,7 +136,6 @@ class Building extends Component {
       } else four = false;
     }
 
-    var oneboard = potentialMove[0][0];
     if (
       0 <= potentialMove[0][0] &&
       potentialMove[0][0] <= sizeLimit &&
@@ -204,16 +190,11 @@ class Building extends Component {
     //console.log(actualPotentialMoves);
 
     if (actualPotentialMoves.length == 0) {
-      //this.morePathFinders();
-      //  console.log("end detected AGAIN");
-      //this.pathMore(2);
+      //if length is zero here, then you know there is a 'dead end' in the maze
     } else if (pathO.length !== 1) {
-      //console.log("i suppose the pathO length is NOT one");
-      //console.log(pathO.length);
       var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
-      //console.log("the chooserNext chooses: ");
-      //console.log(chooserNext);
 
+      //execution and use of a function that determines the direction of the last move
       var newDir = pastAbsDirection(
         exwy[exwy.length - zcounter][0],
         actualPotentialMoves[chooserNext - 1][0],
@@ -221,8 +202,7 @@ class Building extends Component {
         actualPotentialMoves[chooserNext - 1][1]
       );
 
-      //console.log("the newDir is calculated to be:");
-      //console.log(newDir);
+      //determine the new coordinates based on the direction (coded 1-4)
 
       if (newDir == 3) {
         exwy.push(
@@ -257,18 +237,17 @@ class Building extends Component {
           actualPotentialMoves[chooserNext - 1]
         );
       }
-      //console.log("we actually pushed new values (exwy) i hope and they are:");
-      //console.log(exwy);
     }
     if (stepback < pathO.length) {
       this.setState((state) => {
         return { pathO: exwy, stepback: state.stepback + 2 };
       });
     } else {
-      //   console.log("end detected");
+      //if the stepback becomes larger than the length of the 'move' array pathO
+      //then we know the maze is complete and we can end the interval
       clearInterval(this.state.interval);
     }
-    //  console.log(ex);
+
     this.forceUpdate();
   }
 
@@ -278,31 +257,24 @@ class Building extends Component {
   }
 
   pathgenerator() {
-    var { pathO, pathN } = this.state;
+    var { pathO } = this.state;
     const viewSize = this.props.sizeValue;
     const sizeLimit = viewSize - 2;
-
-    // var ex = pathX;
-    // var wy = pathY;
     var exwy = pathO;
-    //console.log("the Path so far is defined by : ");
-    //console.log(pathO);
 
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    //console.log(pathO.length + " is the length of pathO");
 
     if (pathO.length == 1) {
       var chooser = randomNumber(1, 3);
-      //   console.log(chooser);
+
       if (chooser == 1) {
         exwy.push([1, 0], [2, 0]);
       } else if (chooser == 2) {
         exwy.push([0, 1], [0, 2]);
       }
     } else {
-      //console.log("not first turn!");
       function pastDirection(x1, x2, y1, y2) {
         if (x1 == x2 && y1 > y2) {
           return 1;
@@ -325,14 +297,13 @@ class Building extends Component {
         [exwy[exwy.length - 1][0], exwy[exwy.length - 1][1] + 2],
         [exwy[exwy.length - 1][0], exwy[exwy.length - 1][1] - 2],
       ];
-      //console.log("the potential moves are calculated to be:");
-      //console.log(potentialMove);
-      //these below mark whether the potential move exists in move array
+
+      //these flags below mark whether the potential move exists in move array
       var one = null;
       var two = null;
       var three = null;
       var four = null;
-      //these below mark whether the potential move is on the board
+      //these flags below mark whether the potential move is on the board or off the board
       var oneBoard = null;
       var twoBoard = null;
       var threeBoard = null;
@@ -378,7 +349,6 @@ class Building extends Component {
         } else four = false;
       }
 
-      var oneboard = potentialMove[0][0];
       if (
         0 <= potentialMove[0][0] &&
         potentialMove[0][0] <= sizeLimit &&
@@ -415,9 +385,6 @@ class Building extends Component {
         fourBoard = false;
       } else fourBoard = true;
 
-      //console.log("and now presenting the value of exwy:");
-      //console.log(exwy);
-
       var actualPotentialMoves = [];
       if (one == false && oneBoard == false) {
         actualPotentialMoves.push(potentialMove[0]);
@@ -432,19 +399,13 @@ class Building extends Component {
         actualPotentialMoves.push(potentialMove[3]);
       }
       //array of valid potential moves (unvisited and on the board) is logged below
-      //console.log("the actual Potential VALID moves are: ");
-      //console.log(actualPotentialMoves);
 
       if (actualPotentialMoves.length == 0) {
         this.morePathFinders();
-        //     console.log("end detected");
-        //this.pathMore(exwy[exwy.length - 2])
       } else if (pathO.length !== 1) {
         this.state.stepback = 3;
 
         var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
-        //console.log("the chooserNext chooses: ");
-        //console.log(chooserNext);
 
         var newDir = pastDirection(
           exwy[exwy.length - 1][0],
@@ -452,9 +413,6 @@ class Building extends Component {
           exwy[exwy.length - 1][1],
           actualPotentialMoves[chooserNext - 1][1]
         );
-
-        //console.log("the newDir is calculated to be:");
-        //console.log(newDir);
 
         if (newDir == 3) {
           exwy.push(
@@ -502,7 +460,7 @@ class Building extends Component {
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
-    const sizeLimit = viewSize - 2;
+    //const sizeLimit = viewSize - 2;
 
     var x;
     var y;
@@ -545,9 +503,8 @@ class App extends Component {
     };
   }
   enterCount() {
-    //console.log("hello");
     var zvalue = document.getElementById("sizeHere").value;
-    //console.log(zvalue);
+
     this.setState((state) => {
       return { count: zvalue };
     });
@@ -574,6 +531,10 @@ class App extends Component {
     return (
       <div>
         <div className="HeaderSpot">{inputBox}</div>
+        <div class="slider">
+          <p class="slider"> Default range slider:</p>
+          <input class="slider" type="range" min="20" max="3000"></input>
+        </div>
         <Building sizeValue={count} />
       </div>
     );
