@@ -13,13 +13,12 @@ class Building extends Component {
   }
 
   renderSquare(x, y) {
-    var { pathO, stepback } = this.state;
+    var { pathO, stepback, complete } = this.state;
     const viewSize = this.props.sizeValue;
 
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    var z = randomNumber(1, 15);
 
     var bid = "b1";
     var bad = "bplus";
@@ -32,7 +31,8 @@ class Building extends Component {
         return <button class="green" codeX={x} codeY={y}></button>;
       } else if (
         x == pathO[pathO.length - 1][0] &&
-        y == pathO[pathO.length - 1][1]
+        y == pathO[pathO.length - 1][1] &&
+        stepback < pathO.length
       ) {
         return <button class="blue" codeX={x} codeY={y}></button>;
       } else if (
@@ -264,6 +264,22 @@ class Building extends Component {
       return Math.floor(Math.random() * (max - min)) + min;
     }
 
+    function pastDirection(x1, x2, y1, y2) {
+      if (x1 == x2 && y1 > y2) {
+        return 1;
+        //up
+      } else if (x1 == x2 && y1 < y2) {
+        return 2;
+        //down
+      } else if (x1 > x2 && y1 == y2) {
+        return 3;
+        //left
+      } else if (x1 < x2 && y1 == y2) {
+        return 4;
+        //right
+      }
+    }
+
     if (pathO.length == 1) {
       var chooser = randomNumber(1, 3);
 
@@ -273,22 +289,6 @@ class Building extends Component {
         exwy.push([0, 1], [0, 2]);
       }
     } else {
-      function pastDirection(x1, x2, y1, y2) {
-        if (x1 == x2 && y1 > y2) {
-          return 1;
-          //up
-        } else if (x1 == x2 && y1 < y2) {
-          return 2;
-          //down
-        } else if (x1 > x2 && y1 == y2) {
-          return 3;
-          //left
-        } else if (x1 < x2 && y1 == y2) {
-          return 4;
-          //right
-        }
-      }
-
       var potentialMove = [
         [exwy[exwy.length - 1][0] + 2, exwy[exwy.length - 1][1]],
         [exwy[exwy.length - 1][0] - 2, exwy[exwy.length - 1][1]],
@@ -454,6 +454,19 @@ class Building extends Component {
     this.forceUpdate();
   }
 
+  upmove() {
+    console.log("up");
+  }
+  downmove() {
+    console.log("down");
+  }
+  rightmove() {
+    console.log("right");
+  }
+  leftmove() {
+    console.log("left");
+  }
+
   render() {
     const elementS = [];
     const elementZ = [];
@@ -482,7 +495,18 @@ class Building extends Component {
         <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
           Click to Start
         </button>
-
+        <button id="largebutton" onClick={() => this.upmove()}>
+          UP
+        </button>{" "}
+        <button id="largebutton" onClick={() => this.downmove()}>
+          DOWN
+        </button>{" "}
+        <button id="largebutton" onClick={() => this.leftmove()}>
+          LEFT
+        </button>{" "}
+        <button id="largebutton" onClick={() => this.rightmove()}>
+          RIGHT
+        </button>
         <div>
           {elementZ.map((value, index) => {
             return <span key={index}>{value}</span>;
@@ -522,6 +546,34 @@ class App extends Component {
           >
             ENTER
           </button>
+          <button
+            type="button"
+            class="largebutton"
+            onClick={() => this.enterCount()}
+          >
+            UP
+          </button>
+          <button
+            type="button"
+            class="largebutton"
+            onClick={() => this.enterCount()}
+          >
+            DOWN
+          </button>
+          <button
+            type="button"
+            class="largebutton"
+            onClick={() => this.enterCount()}
+          >
+            LEFT
+          </button>
+          <button
+            type="button"
+            class="largebutton"
+            onClick={() => this.enterCount()}
+          >
+            RIGHT
+          </button>
           10 PRINT CHR$ (205.5 + RND (1)); : GOTO 10
         </form>
       </div>
@@ -529,10 +581,7 @@ class App extends Component {
     return (
       <div>
         <div className="HeaderSpot">{inputBox}</div>
-        <div class="slider">
-          <p class="slider"> Default range slider:</p>
-          <input class="slider" type="range" min="20" max="3000"></input>
-        </div>
+
         <Building sizeValue={count} />
       </div>
     );
