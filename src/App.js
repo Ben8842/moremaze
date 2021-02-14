@@ -4,7 +4,7 @@ import "./App.css";
 class Building extends Component {
   constructor(props) {
     super(props);
-    var superpath = [];
+
     this.state = {
       pathO: [[0, 0]],
       stepback: 3,
@@ -15,9 +15,7 @@ class Building extends Component {
   renderSquare(x, y) {
     var { pathO, stepback } = this.state;
     const viewSize = this.props.sizeValue;
-    function shuffle(arry) {
-      arry.sort(() => Math.random() - 0.5);
-    }
+
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
