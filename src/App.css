@@ -112,7 +112,103 @@ button:focus {
 
 .orange {
   border: none;
-  background-color: orange;
+  background-color: rgb(255, 0, 200);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange2 {
+  border: none;
+  background-color: rgb(234, 0, 255);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange2 {
+  border: none;
+  background-color: rgb(162, 0, 255);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange3 {
+  border: none;
+  background-color: rgb(0, 17, 255);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange4 {
+  border: none;
+  background-color: rgb(0, 217, 255);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange5 {
+  border: none;
+  background-color: rgb(72, 255, 0);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange6 {
+  border: none;
+  background-color: rgb(251, 255, 0);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange7 {
+  border: none;
+  background-color: rgb(255, 124, 2);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.orange8 {
+  border: none;
+  background-color: rgb(255, 0, 0);
   color: white;
   padding: 0;
   font-size: 5px;
@@ -150,4 +246,16 @@ button:focus {
   text-align: center;
   margin: 20px;
   align-content: center;
+}
+
+.icon {
+  border: none;
+  background-color: rgb(229, 255, 0);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
 }

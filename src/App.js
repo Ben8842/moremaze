@@ -9,11 +9,12 @@ class Building extends Component {
       pathO: [[0, 0]],
       stepback: 3,
       complete: false,
+      icon: [0, 0],
     };
   }
 
   renderSquare(x, y) {
-    var { pathO, stepback, complete } = this.state;
+    var { pathO, stepback, icon } = this.state;
     const viewSize = this.props.sizeValue;
 
     function randomNumber(min, max) {
@@ -25,7 +26,9 @@ class Building extends Component {
 
     var i = null;
     for (i = 0; i < pathO.length; i++) {
-      if (x == 0 && y == 0) {
+      if (stepback == pathO.length && x == icon[0] && y == icon[1]) {
+        return <button class="icon" codeX={x} codeY={y}></button>;
+      } else if (x == 0 && y == 0) {
         return <button class="green" codeX={x} codeY={y}></button>;
       } else if (x == viewSize - 2 && y == viewSize - 2) {
         return <button class="green" codeX={x} codeY={y}></button>;
@@ -41,6 +44,83 @@ class Building extends Component {
         y == pathO[pathO.length - stepback < 0 ? 0 : pathO.length - stepback][1]
       ) {
         return <button class="orange" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 1 < 0 ? 0 : pathO.length - 1 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 1 < 0 ? 0 : pathO.length - 1 - stepback
+          ][1]
+      ) {
+        return <button class="orange2" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 2 < 0 ? 0 : pathO.length - 2 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 2 < 0 ? 0 : pathO.length - 2 - stepback
+          ][1]
+      ) {
+        return <button class="orange3" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 3 < 0 ? 0 : pathO.length - 3 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 3 < 0 ? 0 : pathO.length - 3 - stepback
+          ][1]
+      ) {
+        return <button class="orange4" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 4 < 0 ? 0 : pathO.length - 4 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 4 < 0 ? 0 : pathO.length - 4 - stepback
+          ][1]
+      ) {
+        return <button class="orange5" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 5 < 0 ? 0 : pathO.length - 5 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 5 < 0 ? 0 : pathO.length - 5 - stepback
+          ][1]
+      ) {
+        return <button class="orange6" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 6 < 0 ? 0 : pathO.length - 6 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 6 < 0 ? 0 : pathO.length - 6 - stepback
+          ][1]
+      ) {
+        return <button class="orange7" codeX={x} codeY={y}></button>;
+      } else if (
+        x ==
+          pathO[
+            pathO.length - stepback - 7 < 0 ? 0 : pathO.length - 7 - stepback
+          ][0] &&
+        y ==
+          pathO[
+            pathO.length - stepback - 7 < 0 ? 0 : pathO.length - 7 - stepback
+          ][1]
+      ) {
+        return <button class="orange8" codeX={x} codeY={y}></button>;
       } else if (x == pathO[i][0] && y == pathO[i][1]) {
         return <button class={bad} codeX={x} codeY={y}></button>;
       }
@@ -455,16 +535,64 @@ class Building extends Component {
   }
 
   upmove() {
+    var { icon, pathO } = this.state;
+    var u;
+
+    for (u = 0; u < pathO.length; u++) {
+      if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] - 1) {
+        this.setState((state) => {
+          return { icon: [icon[0], icon[1] - 1] };
+        });
+        break;
+      } else console.log("wall");
+    }
+
     console.log("up");
   }
   downmove() {
-    console.log("down");
+    var { icon, pathO } = this.state;
+    var u;
+
+    for (u = 0; u < pathO.length; u++) {
+      if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] + 1) {
+        this.setState((state) => {
+          return { icon: [icon[0], icon[1] + 1] };
+        });
+        break;
+      } else console.log("wall");
+    }
+
+    console.log("up");
   }
   rightmove() {
-    console.log("right");
+    var { icon, pathO } = this.state;
+    var u;
+
+    for (u = 0; u < pathO.length; u++) {
+      if (pathO[u][0] == icon[0] + 1 && pathO[u][1] == icon[1]) {
+        this.setState((state) => {
+          return { icon: [icon[0] + 1, icon[1]] };
+        });
+        break;
+      } else console.log("wall");
+    }
+
+    console.log("up");
   }
   leftmove() {
-    console.log("left");
+    var { icon, pathO } = this.state;
+    var u;
+
+    for (u = 0; u < pathO.length; u++) {
+      if (pathO[u][0] == icon[0] - 1 && pathO[u][1] == icon[1]) {
+        this.setState((state) => {
+          return { icon: [icon[0] - 1, icon[1]] };
+        });
+        break;
+      } else console.log("wall");
+    }
+
+    console.log("up");
   }
 
   render() {
