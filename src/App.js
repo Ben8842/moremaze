@@ -1,3 +1,32 @@
+/* logic summary:
+
+************************************************************************************************
+
+1.  given the current X, Y value, calculate the 4 potential moves (up, down, left, and right)
+
+2. Now investigate these 4 moves and determine two things on each.  
+		a.  Has the move been visited before?  true/false
+		b.  Is this move located on the board?  true/false
+
+         If a. is false AND b. is true, then mark this move as a VALID potential move.
+				also add this to the VALID potential move array. 
+ 
+			If a. is true OR b. is false, then this move is invalid. 
+
+3.  If the length of the VALID potential move array is NOT zero, choose 
+a random VALID potential move, move to it (determine the previous path direction and add
+the appropriate coordinates to connect the path), and record this in the move array.
+
+4.  If the length of the VALID potential move array IS zero, this means you found a dead end.  
+Increase the step back value 2 points, and repeat steps 1, 2, 3, 4, but step 2 steps back in the 
+move array and use that 'stepback' value as the spot for 'current' x y values.  
+
+5. End the algorithm once all spots have been checked.  
+
+
+************************************************************************************************
+*/
+
 import React, { Component } from "react";
 import "./App.css";
 
@@ -595,10 +624,79 @@ class Building extends Component {
     console.log("up");
   }
 
+  renderControl(x, y) {
+    if (
+      (x == 0 && y == 0) |
+      (x == 2 && y == 0) |
+      (x == 1 && y == 1) |
+      (x == 0 && y == 2) |
+      (x == 2 && y == 2)
+    ) {
+      return <button class="bgrey" codeX={x} codeY={y}></button>;
+    } else if (x == 1 && y == 0) {
+      return (
+        <button
+          class="bdirection"
+          codeX={x}
+          codeY={y}
+          onClick={() => this.upmove()}
+        ></button>
+      );
+    } else if (x == 0 && y == 1) {
+      return (
+        <button
+          class="bdirection"
+          codeX={x}
+          codeY={y}
+          onClick={() => this.leftmove()}
+        ></button>
+      );
+    } else if (x == 2 && y == 1) {
+      return (
+        <button
+          class="bdirection"
+          codeX={x}
+          codeY={y}
+          onClick={() => this.rightmove()}
+        ></button>
+      );
+    } else if (x == 1 && y == 2) {
+      return (
+        <button
+          class="bdirection"
+          codeX={x}
+          codeY={y}
+          onClick={() => this.downmove()}
+        ></button>
+      );
+    } else return <button class="bdirection" codeX={x} codeY={y}></button>;
+  }
+
   render() {
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
+
+    const aray = [];
+    const bray = [];
+    var a;
+    var b;
+    for (a = 0; a < 3; a++) {
+      for (b = 0; b < 3; b++) {
+        aray.push(<span>{this.renderControl(b, a)}</span>);
+      }
+      bray.push(
+        <div className="newLineC">
+          {aray.map((value, index) => {
+            return <span key={index}>{value}</span>;
+          })}
+        </div>
+      );
+      for (b = 0; b < 9; b++) {
+        aray.pop();
+      }
+    }
+
     //const sizeLimit = viewSize - 2;
 
     var x;
@@ -623,18 +721,12 @@ class Building extends Component {
         <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
           Click to Start
         </button>
-        <button id="largebutton" onClick={() => this.upmove()}>
-          UP
-        </button>{" "}
-        <button id="largebutton" onClick={() => this.downmove()}>
-          DOWN
-        </button>{" "}
-        <button id="largebutton" onClick={() => this.leftmove()}>
-          LEFT
-        </button>{" "}
-        <button id="largebutton" onClick={() => this.rightmove()}>
-          RIGHT
-        </button>
+
+        <div className="directionLand">
+          {bray.map((value, index) => {
+            return <span key={index}>{value}</span>;
+          })}
+        </div>
         <div>
           {elementZ.map((value, index) => {
             return <span key={index}>{value}</span>;

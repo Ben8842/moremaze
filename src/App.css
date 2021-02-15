@@ -259,3 +259,31 @@ button:focus {
   text-align: center;
   width: 75px;
 }
+
+.bgrey {
+  border: none;
+  background-color: rgb(107, 105, 107);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.bdirection {
+  border: none;
+  background-color: rgb(0, 255, 21);
+  color: white;
+  padding: 0;
+  font-size: 5px;
+  margin: -4px;
+  height: 75px;
+  text-align: center;
+  width: 75px;
+}
+
+.directionLand {
+  margin: 40px;
+}
