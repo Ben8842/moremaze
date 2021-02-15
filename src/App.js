@@ -674,34 +674,6 @@ class App extends Component {
           >
             ENTER
           </button>
-          <button
-            type="button"
-            class="largebutton"
-            onClick={() => this.enterCount()}
-          >
-            UP
-          </button>
-          <button
-            type="button"
-            class="largebutton"
-            onClick={() => this.enterCount()}
-          >
-            DOWN
-          </button>
-          <button
-            type="button"
-            class="largebutton"
-            onClick={() => this.enterCount()}
-          >
-            LEFT
-          </button>
-          <button
-            type="button"
-            class="largebutton"
-            onClick={() => this.enterCount()}
-          >
-            RIGHT
-          </button>
           10 PRINT CHR$ (205.5 + RND (1)); : GOTO 10
         </form>
       </div>
