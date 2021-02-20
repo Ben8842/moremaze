@@ -26,9 +26,11 @@ move array and use that 'stepback' value as the spot for 'current' x y values.
 
 ************************************************************************************************
 */
-
 import React, { Component } from "react";
 import "./App.css";
+//import keydown from "react-keydown";
+
+//const KEYS = [37, 38, 39, 40];
 
 class Building extends Component {
   constructor(props) {
@@ -570,7 +572,7 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] - 1) {
         this.setState((state) => {
-          return { icon: [icon[0], icon[1] - 1] };
+          return { icon: [icon[0], icon[1] - 2] };
         });
         break;
       } else console.log("wall");
@@ -585,7 +587,7 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] + 1) {
         this.setState((state) => {
-          return { icon: [icon[0], icon[1] + 1] };
+          return { icon: [icon[0], icon[1] + 2] };
         });
         break;
       } else console.log("wall");
@@ -600,7 +602,7 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] + 1 && pathO[u][1] == icon[1]) {
         this.setState((state) => {
-          return { icon: [icon[0] + 1, icon[1]] };
+          return { icon: [icon[0] + 2, icon[1]] };
         });
         break;
       } else console.log("wall");
@@ -615,7 +617,7 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] - 1 && pathO[u][1] == icon[1]) {
         this.setState((state) => {
-          return { icon: [icon[0] - 1, icon[1]] };
+          return { icon: [icon[0] - 2, icon[1]] };
         });
         break;
       } else console.log("wall");
@@ -628,7 +630,6 @@ class Building extends Component {
     if (
       (x == 0 && y == 0) |
       (x == 2 && y == 0) |
-      (x == 1 && y == 1) |
       (x == 0 && y == 2) |
       (x == 2 && y == 2)
     ) {
