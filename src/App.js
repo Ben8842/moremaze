@@ -41,6 +41,7 @@ class Building extends Component {
       stepback: 3,
       complete: false,
       icon: [0, 0],
+      stepz: 0,
     };
   }
 
@@ -626,6 +627,18 @@ class Building extends Component {
     console.log("up");
   }
 
+  nextExplanation() {
+    this.setState((state) => {
+      return { stepz: this.state.stepz + 1 };
+    });
+  }
+
+  skipExplanation() {
+    this.setState((state) => {
+      return { stepz: 5 };
+    });
+  }
+
   renderControl(x, y) {
     if (
       (x == 0 && y == 0) |
@@ -674,6 +687,7 @@ class Building extends Component {
   }
 
   render() {
+    var { stepz } = this.state;
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
@@ -717,7 +731,8 @@ class Building extends Component {
         elementS.pop();
       }
     }
-    return (
+
+    const entireThingz = (
       <div className="entireThing">
         <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
           Click to Start
@@ -733,6 +748,121 @@ class Building extends Component {
             return <span key={index}>{value}</span>;
           })}
         </div>
+      </div>
+    );
+
+    const explanationZero = (
+      <div id="explanation">
+        <div>
+          <p>
+            Welcome to my Maze Algorithm! I challenged myself to build an
+            algorithm that could build randomly generated mazes.{" "}
+          </p>
+          <p>This is how it works! </p>
+          The algorithm first examines four potential moves. It examines moving
+          up, down, left and right. It looks for two things: 1. It determines
+          whether these four potential moves are on the board. 2. It also
+          determines whether or not the maze has visited this area of the board
+          before. Based on these two conditions the algorithm determines whether
+          any of these four moves are 'valid'.
+        </div>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          Next
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip
+        </button>
+      </div>
+    );
+
+    const explanationOne = (
+      <div id="explanation">
+        <div>
+          The algorithm takes this new 'valid' move array and chooses a random
+          'valid' move to move to. I use a random number choosing function to
+          accomplish this such as "Math.floor(Math.random() * (max - min)) +
+          min"{" "}
+        </div>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          Next
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip
+        </button>
+      </div>
+    );
+
+    const explanationTwo = (
+      <div id="explanation">
+        <div>
+          Once a 'random' and 'valid' move is chosen, the algorithm 'moves' to
+          this new space on the maze, building the path and recording the move
+          into the 'move' array so that I do not visit it again.{" "}
+        </div>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          Next
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip
+        </button>
+      </div>
+    );
+
+    const explanationThree = (
+      <div id="explanation">
+        <div>
+          My maze will innevitably draw towards 'dead ends' where it will be
+          determined that there are zero valid moves available. This is where
+          the fun starts. My algorithm uses a 'stepback' state variable and it
+          will 'stepback' one space on the move array (step back on the current
+          maze path). Once it steps back once step, it again searches and
+          examines the four potential moves (up down left and right) to see if
+          there are any valid moves that it has missed. If it finds another
+          deadend at this new spot, the 'stepback' state variable will increment
+          one more step, and the algorithm will repeat the process until it
+          finds a valid move. Using this strategy guarantees that the maze will
+          draw paths on all areas of the board, including the start and end
+          position of the maze.{" "}
+        </div>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          Next
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip
+        </button>
+      </div>
+    );
+
+    const explanationFour = (
+      <div id="explanation">
+        <div>
+          One subtlety, it is important to reset the stepback state variable
+          each time it reaches a new deadend. This way the stepback variable can
+          be used to trigger the end of the algorithm. The algorithm knows to
+          stop searching and building maze paths once the stepback state
+          variable increments to a value that is larger than the length of the
+          maze move array (the array that tracks all the move paths). And now
+          you can continue "Next" to see my maze algorithm in action! In
+          real-time my maze algorithm will build you a uniquely randomized maze
+          just for you!
+        </div>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          Next
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip
+        </button>
+      </div>
+    );
+
+    return (
+      <div class="entireThing">
+        {stepz == 0 ? explanationZero : null}
+        {stepz == 1 ? explanationOne : null}
+        {stepz == 2 ? explanationTwo : null}
+        {stepz == 3 ? explanationThree : null}
+        {stepz == 4 ? explanationFour : null}
+        {stepz == 5 ? entireThingz : null}
       </div>
     );
   }

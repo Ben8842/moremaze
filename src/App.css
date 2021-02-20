@@ -287,3 +287,16 @@ button:focus {
 .directionLand {
   margin: 40px;
 }
+
+#explanation {
+  font-size: 40px;
+  text-align: center;
+  border-radius: 35px;
+  border: solid;
+  border-width: 10px;
+  color: white;
+  background-color: rgb(107, 105, 107);
+  height: 1000px;
+  width: 2000px;
+  margin: 0 auto;
+}
