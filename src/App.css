@@ -306,7 +306,7 @@ button:focus {
   margin: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media only screen and (max-width: 700px) {
   .HeaderSpot {
     margin: 4px;
     background-color: black;
@@ -315,9 +315,11 @@ button:focus {
   }
 
   .entireThing {
-    margin: 4px;
+    margin: 0px;
     background-color: black;
     text-align: center;
+    width: 100%;
+    height: 100%;
   }
 
   button:focus {
@@ -610,5 +612,12 @@ button:focus {
   img {
     height: 100%;
     width: 100%;
+  }
+  span {
+    min-height: 10px;
+  }
+  o {
+    min-height: 10px;
+    min-width: 10px;
   }
 }
