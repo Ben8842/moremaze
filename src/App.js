@@ -821,7 +821,7 @@ class Building extends Component {
           this new space on the maze, building the path and recording the move
           into the 'move' array so that I do not visit it again.
           <p>
-            When rendering the paths of the maze, the algorithm uses 'nested for
+            When rendering the paths of the maze, my algorithm uses 'nested for
             loops' and builds the entire grid using squares labeled with x and y
             coordinates as shown below. Each iteration of the for loop pushes
             the new square value to the array, and eventually pushes the entire
@@ -865,7 +865,7 @@ class Building extends Component {
             </p>
             <p>
               The structure I used is such that the 'origin' maze building
-              function is called at an interval, triggering the maze building
+              function is called at an interval, triggering my maze building
               function 40 times per second. My 'pathgenerator' builds paths
               until it reaches a deadend. My algorithm detects the deadend and
               triggers my 'morepathfinder' function which utilizes the stepback
