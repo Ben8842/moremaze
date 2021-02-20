@@ -28,6 +28,11 @@ move array and use that 'stepback' value as the spot for 'current' x y values.
 */
 import React, { Component } from "react";
 import "./App.css";
+
+var firstimg = require("./imgfolder/nestedForLoops.png").default;
+var secondimg = require("./imgfolder/pastDirection.png").default;
+var thirdimg = require("./imgfolder/potentialmove.png").default;
+var fourthimg = require("./imgfolder/structure.png").default;
 //import keydown from "react-keydown";
 
 //const KEYS = [37, 38, 39, 40];
@@ -158,207 +163,6 @@ class Building extends Component {
       }
     }
     return <button class={bid} codeX={x} codeY={y}></button>;
-  }
-
-  morePathFinders() {
-    var { pathO, stepback } = this.state;
-    const viewSize = this.props.sizeValue;
-    const sizeLimit = viewSize - 2;
-    var exwy = pathO;
-
-    function randomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-
-    var zcounter = stepback;
-    function pastAbsDirection(x1, x2, y1, y2) {
-      if (x1 == x2 && y1 > y2) {
-        return 1;
-        //up
-      } else if (x1 == x2 && y1 < y2) {
-        return 2;
-        //down
-      } else if (x1 > x2 && y1 == y2) {
-        return 3;
-        //left
-      } else if (x1 < x2 && y1 == y2) {
-        return 4;
-        //right
-      }
-    }
-
-    var potentialMove = [
-      [exwy[exwy.length - zcounter][0] + 2, exwy[exwy.length - zcounter][1]],
-      [exwy[exwy.length - zcounter][0] - 2, exwy[exwy.length - zcounter][1]],
-      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] + 2],
-      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] - 2],
-    ];
-
-    //these flags below mark whether the potential move exists in move array
-    var one = null;
-    var two = null;
-    var three = null;
-    var four = null;
-    //these below mark whether the potential move is on the board
-    var oneBoard = null;
-    var twoBoard = null;
-    var threeBoard = null;
-    var fourBoard = null;
-    var u = 0;
-    var i = 0;
-    var p = 0;
-    var k = 0;
-
-    for (u = 0; u < exwy.length; u++) {
-      if (
-        exwy[u][0] == potentialMove[0][0] &&
-        exwy[u][1] == potentialMove[0][1]
-      ) {
-        one = true;
-        break;
-      } else one = false;
-    }
-    for (i = 0; i < exwy.length; i++) {
-      if (
-        exwy[i][0] == potentialMove[1][0] &&
-        exwy[i][1] == potentialMove[1][1]
-      ) {
-        two = true;
-        break;
-      } else two = false;
-    }
-    for (p = 0; p < exwy.length; p++) {
-      if (
-        exwy[p][0] == potentialMove[2][0] &&
-        exwy[p][1] == potentialMove[2][1]
-      ) {
-        three = true;
-        break;
-      } else three = false;
-    }
-    for (k = 0; k < exwy.length; k++) {
-      if (
-        exwy[k][0] == potentialMove[3][0] &&
-        exwy[k][1] == potentialMove[3][1]
-      ) {
-        four = true;
-        break;
-      } else four = false;
-    }
-
-    if (
-      0 <= potentialMove[0][0] &&
-      potentialMove[0][0] <= sizeLimit &&
-      0 <= potentialMove[0][1] &&
-      potentialMove[0][1] <= sizeLimit
-    ) {
-      oneBoard = false;
-    } else oneBoard = true;
-
-    if (
-      0 <= potentialMove[1][0] &&
-      potentialMove[1][0] <= sizeLimit &&
-      0 <= potentialMove[1][1] &&
-      potentialMove[1][1] <= sizeLimit
-    ) {
-      twoBoard = false;
-    } else twoBoard = true;
-
-    if (
-      0 <= potentialMove[2][0] &&
-      potentialMove[2][0] <= sizeLimit &&
-      0 <= potentialMove[2][1] &&
-      potentialMove[2][1] <= sizeLimit
-    ) {
-      threeBoard = false;
-    } else threeBoard = true;
-
-    if (
-      0 <= potentialMove[3][0] &&
-      potentialMove[3][0] <= sizeLimit &&
-      0 <= potentialMove[3][1] &&
-      potentialMove[3][1] <= sizeLimit
-    ) {
-      fourBoard = false;
-    } else fourBoard = true;
-
-    var actualPotentialMoves = [];
-    if (one == false && oneBoard == false) {
-      actualPotentialMoves.push(potentialMove[0]);
-    }
-    if (two == false && twoBoard == false) {
-      actualPotentialMoves.push(potentialMove[1]);
-    }
-    if (three == false && threeBoard == false) {
-      actualPotentialMoves.push(potentialMove[2]);
-    }
-    if (four == false && fourBoard == false) {
-      actualPotentialMoves.push(potentialMove[3]);
-    }
-    //array of valid potential moves (unvisited and on the board) is logged below
-    //console.log("the actual Potential VALID moves are: ");
-    //console.log(actualPotentialMoves);
-
-    if (actualPotentialMoves.length == 0) {
-      //if length is zero here, then you know there is a 'dead end' in the maze
-    } else if (pathO.length !== 1) {
-      var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
-
-      //execution and use of a function that determines the direction of the last move
-      var newDir = pastAbsDirection(
-        exwy[exwy.length - zcounter][0],
-        actualPotentialMoves[chooserNext - 1][0],
-        exwy[exwy.length - zcounter][1],
-        actualPotentialMoves[chooserNext - 1][1]
-      );
-
-      //determine the new coordinates based on the direction (coded 1-4)
-
-      if (newDir == 3) {
-        exwy.push(
-          [
-            actualPotentialMoves[chooserNext - 1][0] + 1,
-            actualPotentialMoves[chooserNext - 1][1],
-          ],
-          actualPotentialMoves[chooserNext - 1]
-        );
-      } else if (newDir == 4) {
-        exwy.push(
-          [
-            actualPotentialMoves[chooserNext - 1][0] - 1,
-            actualPotentialMoves[chooserNext - 1][1],
-          ],
-          actualPotentialMoves[chooserNext - 1]
-        );
-      } else if (newDir == 1) {
-        exwy.push(
-          [
-            actualPotentialMoves[chooserNext - 1][0],
-            actualPotentialMoves[chooserNext - 1][1] + 1,
-          ],
-          actualPotentialMoves[chooserNext - 1]
-        );
-      } else if (newDir == 2) {
-        exwy.push(
-          [
-            actualPotentialMoves[chooserNext - 1][0],
-            actualPotentialMoves[chooserNext - 1][1] - 1,
-          ],
-          actualPotentialMoves[chooserNext - 1]
-        );
-      }
-    }
-    if (stepback < pathO.length) {
-      this.setState((state) => {
-        return { pathO: exwy, stepback: state.stepback + 2 };
-      });
-    } else {
-      //if the stepback becomes larger than the length of the 'move' array pathO
-      //then we know the maze is complete and we can end the interval
-      clearInterval(this.state.interval);
-    }
-
-    this.forceUpdate();
   }
 
   pathgeneratorOrigin() {
@@ -566,6 +370,207 @@ class Building extends Component {
     this.forceUpdate();
   }
 
+  morePathFinders() {
+    var { pathO, stepback } = this.state;
+    const viewSize = this.props.sizeValue;
+    const sizeLimit = viewSize - 2;
+    var exwy = pathO;
+
+    function randomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    var zcounter = stepback;
+    function pastAbsDirection(x1, x2, y1, y2) {
+      if (x1 == x2 && y1 > y2) {
+        return 1;
+        //up
+      } else if (x1 == x2 && y1 < y2) {
+        return 2;
+        //down
+      } else if (x1 > x2 && y1 == y2) {
+        return 3;
+        //left
+      } else if (x1 < x2 && y1 == y2) {
+        return 4;
+        //right
+      }
+    }
+
+    var potentialMove = [
+      [exwy[exwy.length - zcounter][0] + 2, exwy[exwy.length - zcounter][1]],
+      [exwy[exwy.length - zcounter][0] - 2, exwy[exwy.length - zcounter][1]],
+      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] + 2],
+      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] - 2],
+    ];
+
+    //these flags below mark whether the potential move exists in move array
+    var one = null;
+    var two = null;
+    var three = null;
+    var four = null;
+    //these below mark whether the potential move is on the board
+    var oneBoard = null;
+    var twoBoard = null;
+    var threeBoard = null;
+    var fourBoard = null;
+    var u = 0;
+    var i = 0;
+    var p = 0;
+    var k = 0;
+
+    for (u = 0; u < exwy.length; u++) {
+      if (
+        exwy[u][0] == potentialMove[0][0] &&
+        exwy[u][1] == potentialMove[0][1]
+      ) {
+        one = true;
+        break;
+      } else one = false;
+    }
+    for (i = 0; i < exwy.length; i++) {
+      if (
+        exwy[i][0] == potentialMove[1][0] &&
+        exwy[i][1] == potentialMove[1][1]
+      ) {
+        two = true;
+        break;
+      } else two = false;
+    }
+    for (p = 0; p < exwy.length; p++) {
+      if (
+        exwy[p][0] == potentialMove[2][0] &&
+        exwy[p][1] == potentialMove[2][1]
+      ) {
+        three = true;
+        break;
+      } else three = false;
+    }
+    for (k = 0; k < exwy.length; k++) {
+      if (
+        exwy[k][0] == potentialMove[3][0] &&
+        exwy[k][1] == potentialMove[3][1]
+      ) {
+        four = true;
+        break;
+      } else four = false;
+    }
+
+    if (
+      0 <= potentialMove[0][0] &&
+      potentialMove[0][0] <= sizeLimit &&
+      0 <= potentialMove[0][1] &&
+      potentialMove[0][1] <= sizeLimit
+    ) {
+      oneBoard = false;
+    } else oneBoard = true;
+
+    if (
+      0 <= potentialMove[1][0] &&
+      potentialMove[1][0] <= sizeLimit &&
+      0 <= potentialMove[1][1] &&
+      potentialMove[1][1] <= sizeLimit
+    ) {
+      twoBoard = false;
+    } else twoBoard = true;
+
+    if (
+      0 <= potentialMove[2][0] &&
+      potentialMove[2][0] <= sizeLimit &&
+      0 <= potentialMove[2][1] &&
+      potentialMove[2][1] <= sizeLimit
+    ) {
+      threeBoard = false;
+    } else threeBoard = true;
+
+    if (
+      0 <= potentialMove[3][0] &&
+      potentialMove[3][0] <= sizeLimit &&
+      0 <= potentialMove[3][1] &&
+      potentialMove[3][1] <= sizeLimit
+    ) {
+      fourBoard = false;
+    } else fourBoard = true;
+
+    var actualPotentialMoves = [];
+    if (one == false && oneBoard == false) {
+      actualPotentialMoves.push(potentialMove[0]);
+    }
+    if (two == false && twoBoard == false) {
+      actualPotentialMoves.push(potentialMove[1]);
+    }
+    if (three == false && threeBoard == false) {
+      actualPotentialMoves.push(potentialMove[2]);
+    }
+    if (four == false && fourBoard == false) {
+      actualPotentialMoves.push(potentialMove[3]);
+    }
+    //array of valid potential moves (unvisited and on the board) is logged below
+    //console.log("the actual Potential VALID moves are: ");
+    //console.log(actualPotentialMoves);
+
+    if (actualPotentialMoves.length == 0) {
+      //if length is zero here, then you know there is a 'dead end' in the maze
+    } else if (pathO.length !== 1) {
+      var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
+
+      //execution and use of a function that determines the direction of the last move
+      var newDir = pastAbsDirection(
+        exwy[exwy.length - zcounter][0],
+        actualPotentialMoves[chooserNext - 1][0],
+        exwy[exwy.length - zcounter][1],
+        actualPotentialMoves[chooserNext - 1][1]
+      );
+
+      //determine the new coordinates based on the direction (coded 1-4)
+
+      if (newDir == 3) {
+        exwy.push(
+          [
+            actualPotentialMoves[chooserNext - 1][0] + 1,
+            actualPotentialMoves[chooserNext - 1][1],
+          ],
+          actualPotentialMoves[chooserNext - 1]
+        );
+      } else if (newDir == 4) {
+        exwy.push(
+          [
+            actualPotentialMoves[chooserNext - 1][0] - 1,
+            actualPotentialMoves[chooserNext - 1][1],
+          ],
+          actualPotentialMoves[chooserNext - 1]
+        );
+      } else if (newDir == 1) {
+        exwy.push(
+          [
+            actualPotentialMoves[chooserNext - 1][0],
+            actualPotentialMoves[chooserNext - 1][1] + 1,
+          ],
+          actualPotentialMoves[chooserNext - 1]
+        );
+      } else if (newDir == 2) {
+        exwy.push(
+          [
+            actualPotentialMoves[chooserNext - 1][0],
+            actualPotentialMoves[chooserNext - 1][1] - 1,
+          ],
+          actualPotentialMoves[chooserNext - 1]
+        );
+      }
+    }
+    if (stepback < pathO.length) {
+      this.setState((state) => {
+        return { pathO: exwy, stepback: state.stepback + 2 };
+      });
+    } else {
+      //if the stepback becomes larger than the length of the 'move' array pathO
+      //then we know the maze is complete and we can end the interval
+      clearInterval(this.state.interval);
+    }
+
+    this.forceUpdate();
+  }
+
   upmove() {
     var { icon, pathO } = this.state;
     var u;
@@ -636,6 +641,12 @@ class Building extends Component {
   skipExplanation() {
     this.setState((state) => {
       return { stepz: 5 };
+    });
+  }
+
+  previousExplanation() {
+    this.setState((state) => {
+      return { stepz: this.state.stepz - 1 };
     });
   }
 
@@ -753,18 +764,21 @@ class Building extends Component {
 
     const explanationZero = (
       <div id="explanation">
-        <div>
+        <div id="divinside">
           <p>
-            Welcome to my Maze Algorithm! I challenged myself to build an
-            algorithm that could build randomly generated mazes.{" "}
+            Welcome to my Maze Algorithm. I challenged myself to build an
+            algorithm that could build randomly generated mazes.
           </p>
-          <p>This is how it works! </p>
-          The algorithm first examines four potential moves. It examines moving
-          up, down, left and right. It looks for two things: 1. It determines
-          whether these four potential moves are on the board. 2. It also
-          determines whether or not the maze has visited this area of the board
-          before. Based on these two conditions the algorithm determines whether
-          any of these four moves are 'valid'.
+          <p>This is how it works. </p>
+          My algorithm first examines four potential moves. It examines moving
+          up, down, left and right. It is looking for two things:{" "}
+          <li> Are each of these four potential moves are on the board?</li>
+          <li>Has this potential location of the board been visited before?</li>
+          Based on these two conditions the algorithm determines whether any of
+          these four moves are 'valid' and pushes them to an array.
+        </div>
+        <div>
+          <img src={thirdimg} alt="mystery"></img>
         </div>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
@@ -778,11 +792,19 @@ class Building extends Component {
     const explanationOne = (
       <div id="explanation">
         <div>
-          The algorithm takes this new 'valid' move array and chooses a random
-          'valid' move to move to. I use a random number choosing function to
-          accomplish this such as "Math.floor(Math.random() * (max - min)) +
-          min"{" "}
+          My algorithm takes this new 'valid' move array and chooses a random
+          'valid' move to build a maze path to. I used a random number function
+          to accomplish this : "Math.floor(Math.random() * (max - min)) + min"
+          <p>
+            I created this function (below) to determine which direction the
+            path needs to be built so that the algorithm knows which coordinates
+            to pick for the next path.
+          </p>
         </div>
+        <img src={secondimg} alt="mystery"></img>
+        <button id="largebutton" onClick={() => this.previousExplanation()}>
+          Previous
+        </button>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
         </button>
@@ -795,10 +817,22 @@ class Building extends Component {
     const explanationTwo = (
       <div id="explanation">
         <div>
-          Once a 'random' and 'valid' move is chosen, the algorithm 'moves' to
+          Once a 'random' and 'valid' move is chosen, my algorithm 'moves' to
           this new space on the maze, building the path and recording the move
-          into the 'move' array so that I do not visit it again.{" "}
+          into the 'move' array so that I do not visit it again.
+          <p>
+            When rendering the paths of the maze, the algorithm uses 'nested for
+            loops' and builds the entire grid using squares labeled with x and y
+            coordinates as shown below. Each iteration of the for loop pushes
+            the new square value to the array, and eventually pushes the entire
+            row of the array to the outer for loop so that every thing can be
+            displayed.
+          </p>
+          <img src={firstimg} alt="mystery"></img>
         </div>
+        <button id="largebutton" onClick={() => this.previousExplanation()}>
+          Previous
+        </button>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
         </button>
@@ -811,19 +845,39 @@ class Building extends Component {
     const explanationThree = (
       <div id="explanation">
         <div>
-          My maze will innevitably draw towards 'dead ends' where it will be
-          determined that there are zero valid moves available. This is where
-          the fun starts. My algorithm uses a 'stepback' state variable and it
-          will 'stepback' one space on the move array (step back on the current
-          maze path). Once it steps back once step, it again searches and
-          examines the four potential moves (up down left and right) to see if
-          there are any valid moves that it has missed. If it finds another
-          deadend at this new spot, the 'stepback' state variable will increment
-          one more step, and the algorithm will repeat the process until it
-          finds a valid move. Using this strategy guarantees that the maze will
-          draw paths on all areas of the board, including the start and end
-          position of the maze.{" "}
+          <div>
+            My maze will innevitably and purposefully draw towards 'dead ends'
+            where it will be determined that there are zero valid moves
+            available. This is where the fun starts.
+            <p>
+              My algorithm uses a 'stepback' state variable and it will
+              'stepback' one space on the move array (step back on the current
+              maze path). Once it steps back one step, it again searches and
+              examines the four potential moves (up down left and right) to see
+              if there are any valid moves that it has missed.{" "}
+            </p>
+            <p>
+              If it finds another deadend at this new spot, the 'stepback' state
+              variable will increment one more step, and the algorithm will
+              repeat the process until it finds a valid move. Using this
+              strategy guarantees that the maze will draw paths on all areas of
+              the board, including the start and end position of the maze.
+            </p>
+            <p>
+              The structure I used is such that the 'origin' maze building
+              function is called at an interval, triggering the maze building
+              function 40 times per second. My 'pathgenerator' builds paths
+              until it reaches a deadend. My algorithm detects the deadend and
+              triggers my 'morepathfinder' function which utilizes the stepback
+              variable and does more searching from all of the stepback
+              locations until the maze is complete.
+            </p>
+            <img src={fourthimg} alt="mystery"></img>
+          </div>
         </div>
+        <button id="largebutton" onClick={() => this.previousExplanation()}>
+          Previous
+        </button>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
         </button>
@@ -836,21 +890,23 @@ class Building extends Component {
     const explanationFour = (
       <div id="explanation">
         <div>
-          One subtlety, it is important to reset the stepback state variable
-          each time it reaches a new deadend. This way the stepback variable can
-          be used to trigger the end of the algorithm. The algorithm knows to
-          stop searching and building maze paths once the stepback state
-          variable increments to a value that is larger than the length of the
-          maze move array (the array that tracks all the move paths). And now
-          you can continue "Next" to see my maze algorithm in action! In
-          real-time my maze algorithm will build you a uniquely randomized maze
-          just for you!
+          It is important to reset the stepback state variable each time it
+          reaches a new deadend. This way the stepback variable can be used to
+          trigger the end of my algorithm. My algorithm knows to stop searching
+          for maze paths once the stepback state variable increments to a value
+          that is larger than the length of the maze move array (the array that
+          tracks all the move paths).
+          <p>
+            Now you can continue "Next" to see my maze algorithm in action! In
+            real-time my maze algorithm will build you a uniquely randomized
+            maze just for you!
+          </p>
         </div>
+        <button id="largebutton" onClick={() => this.previousExplanation()}>
+          Previous
+        </button>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
-        </button>
-        <button id="largebutton" onClick={() => this.skipExplanation()}>
-          Skip
         </button>
       </div>
     );

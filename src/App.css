@@ -298,5 +298,6 @@ button:focus {
   background-color: rgb(107, 105, 107);
   height: 1000px;
   width: 2000px;
-  margin: 0 auto;
+  margin: auto;
+  align-items: center;
 }
