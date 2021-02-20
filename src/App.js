@@ -764,14 +764,14 @@ class Building extends Component {
 
     const explanationZero = (
       <div id="explanation">
-        <div id="divinside">
+        <div>
           <p>
             Welcome to my Maze Algorithm. I challenged myself to build an
             algorithm that could build randomly generated mazes.
           </p>
           <p>This is how it works. </p>
           My algorithm first examines four potential moves. It examines moving
-          up, down, left and right. It is looking for two things:{" "}
+          up, down, left and right. It is looking for two things:
           <li> Are each of these four potential moves are on the board?</li>
           <li>Has this potential location of the board been visited before?</li>
           Based on these two conditions the algorithm determines whether any of

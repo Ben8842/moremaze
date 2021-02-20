@@ -301,3 +301,314 @@ button:focus {
   margin: auto;
   align-items: center;
 }
+
+#divinside {
+  margin: 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .HeaderSpot {
+    margin: 4px;
+    background-color: black;
+    border-color: black;
+    border: solid;
+  }
+
+  .entireThing {
+    margin: 4px;
+    background-color: black;
+    text-align: center;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  #squareGreen {
+    background-color: green;
+    color: black;
+
+    border: none;
+
+    font-weight: bold;
+
+    height: 18px;
+
+    text-align: center;
+    width: 75px;
+  }
+
+  .App {
+    text-align: center;
+  }
+
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .App-link {
+    color: #61dafb;
+  }
+
+  .b1 {
+    border: none;
+    background-color: black;
+    color: black;
+    padding: 0;
+
+    height: 20px;
+    margin: -2px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .bplus {
+    border: none;
+    background-color: white;
+    color: black;
+    padding: 0;
+    height: 20px;
+    margin: -2px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .green {
+    border: none;
+    background-color: lightgreen;
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  #largebutton {
+    height: 25px;
+    width: 200px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5;
+    background-color: rgb(0, 255, 255);
+  }
+
+  .largebutton {
+    height: 25px;
+    width: 200px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5;
+    background-color: rgb(0, 255, 255);
+  }
+
+  .orange {
+    border: none;
+    background-color: rgb(255, 0, 200);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange2 {
+    border: none;
+    background-color: rgb(234, 0, 255);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange2 {
+    border: none;
+    background-color: rgb(162, 0, 255);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange3 {
+    border: none;
+    background-color: rgb(0, 17, 255);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange4 {
+    border: none;
+    background-color: rgb(0, 217, 255);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange5 {
+    border: none;
+    background-color: rgb(72, 255, 0);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange6 {
+    border: none;
+    background-color: rgb(251, 255, 0);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange7 {
+    border: none;
+    background-color: rgb(255, 124, 2);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .orange8 {
+    border: none;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .lightorange {
+    border: none;
+    background-color: rgb(250, 218, 158);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .blue {
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .slider {
+    text-align: center;
+    margin: 20px;
+    align-content: center;
+  }
+
+  .icon {
+    border: none;
+    background-color: rgb(0, 225, 255);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .bgrey {
+    border: none;
+    background-color: rgb(107, 105, 107);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .bdirection {
+    border: none;
+    background-color: rgb(0, 255, 21);
+    color: white;
+    padding: 0;
+    font-size: 5px;
+    margin: -2px;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .directionLand {
+    margin: 20px;
+  }
+
+  #explanation {
+    font-size: 12px;
+    text-align: center;
+    border-radius: 35px;
+    border: solid;
+    border-width: 4px;
+    color: white;
+    background-color: rgb(107, 105, 107);
+    height: 90%;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+  }
+
+  #divinside {
+    margin: 50%;
+  }
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
