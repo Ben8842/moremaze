@@ -168,6 +168,19 @@ class Building extends Component {
     return <button class={bid} codeX={x} codeY={y}></button>;
   }
 
+  mazeAgain() {
+    this.setState({
+      pathO: [[0, 0]],
+      stepback: 3,
+      complete: false,
+      icon: [0, 0],
+
+      controltime: false,
+      mazeProcessing: false,
+    });
+    this.pathgeneratorOrigin();
+  }
+
   pathgeneratorOrigin() {
     var interval = setInterval(this.pathgenerator.bind(this), 25);
     this.setState({ interval: interval, mazeProcessing: true });
@@ -766,10 +779,17 @@ class Building extends Component {
       </div>
     );
 
+    const againButton = (
+      <button id="largebutton" onClick={() => this.mazeAgain()}>
+        New Maze
+      </button>
+    );
+
     const entireThingz = (
       <div className="entireThing">
         {mazeProcessing ? spinner : null}
-        {mazeProcessing && !complete ? null : startButton}
+        {!mazeProcessing && !complete ? startButton : null}
+        {complete ? againButton : null}
 
         <div className="directionLand">
           {bray.map((value, index) => {
