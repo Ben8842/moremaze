@@ -27,6 +27,7 @@ move array and use that 'stepback' value as the spot for 'current' x y values.
 ************************************************************************************************
 */
 import React, { Component } from "react";
+import { useStopwatch } from "react-timer-hook";
 import "./App.css";
 
 var firstimg = require("./imgfolder/nestedForLoops.png").default;
@@ -37,6 +38,36 @@ var gifimg = require("./imgfolder/spinningtwo.gif").default;
 //import keydown from "react-keydown";
 
 //const KEYS = [37, 38, 39, 40];
+
+function MyStopwatch() {
+  const {
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    start,
+    pause,
+    reset,
+  } = useStopwatch({ autoStart: true });
+
+  return (
+    <div>
+      <div style={{ textAlign: "center" }}>
+        <h1>react-timer-hook</h1>
+        <p>Stopwatch Demo</p>
+        <div style={{ fontSize: "100px" }}>
+          <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:
+          <span>{seconds}</span>
+        </div>
+        <p>{isRunning ? "Running" : "Not running"}</p>
+        <button onClick={start}>Start</button>
+        <button onClick={pause}>Pause</button>
+        <button onClick={reset}>Reset</button>
+      </div>
+    </div>
+  );
+}
 
 class Building extends Component {
   constructor(props) {
@@ -831,6 +862,7 @@ class Building extends Component {
       );
     } else return <button class="bdirection" codeX={x} codeY={y}></button>;
   }
+  //  const funtimer = <div>{MyStopwatch()}</div>;
 
   render() {
     var {
@@ -1184,10 +1216,12 @@ class App extends Component {
     return (
       <div>
         <Building sizeValue={count} />
-        <div className="HeaderSpot">{inputBox}</div>
       </div>
     );
   }
 }
+
+//<MyStopwatch />; not ready for this yet?
+//  <div className="HeaderSpot">{inputBox}</div>; also don't need this at this time
 
 export default App;

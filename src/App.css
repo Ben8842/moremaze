@@ -63,10 +63,10 @@ button:focus {
   color: black;
   padding: 0;
 
-  height: 75px;
+  height: 38px;
   margin: -4px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .bplus {
@@ -74,10 +74,10 @@ button:focus {
   background-color: white;
   color: black;
   padding: 0;
-  height: 75px;
+  height: 38px;
   margin: -4px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .green {
@@ -87,18 +87,18 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 #largebutton {
-  height: 70px;
-  width: 250px;
-  font-size: 35px;
+  height: 35px;
+  width: 150px;
+  font-size: 20px;
   font-weight: bold;
-  margin: 75px;
-  padding: 10;
+  margin: 15px;
+  padding: 5;
   background-color: rgb(0, 255, 255);
 }
 
@@ -117,9 +117,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange2 {
@@ -129,9 +129,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange2 {
@@ -141,9 +141,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange3 {
@@ -153,9 +153,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange4 {
@@ -165,9 +165,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange5 {
@@ -177,9 +177,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange6 {
@@ -189,9 +189,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange7 {
@@ -201,9 +201,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .orange8 {
@@ -213,9 +213,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .lightorange {
@@ -225,9 +225,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .blue {
@@ -237,9 +237,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .slider {
@@ -255,9 +255,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .bgrey {
@@ -267,9 +267,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .bdirection {
@@ -279,9 +279,9 @@ button:focus {
   padding: 0;
   font-size: 5px;
   margin: -4px;
-  height: 75px;
+  height: 38px;
   text-align: center;
-  width: 75px;
+  width: 38px;
 }
 
 .directionLand {
@@ -304,6 +304,38 @@ button:focus {
 
 #divinside {
   margin: 50%;
+}
+
+#spinningadventure {
+  height: 25px;
+  width: 25px;
+
+  text-align: left;
+  align-items: left;
+}
+#spinwrap {
+  height: 25px;
+  width: 25px;
+  position: fixed;
+  right: 800;
+  text-align: left;
+  align-items: left;
+}
+#loading {
+  color: rgb(72, 255, 0);
+  font-size: 25px;
+  text-align: center;
+}
+#scoreDisplay {
+  color: rgb(251, 255, 0);
+  font-size: 25px;
+  text-align: left;
+}
+
+#endDisplay {
+  color: rgb(251, 255, 0);
+  font-size: 25px;
+  text-align: left;
 }
 
 @media only screen and (max-width: 700px) {
@@ -624,12 +656,19 @@ button:focus {
     height: 100%;
     width: 100%;
   }
-  span {
-    min-height: 10px;
-  }
+
   o {
-    min-height: 10px;
-    min-width: 10px;
+    max-height: 10px !important;
+    max-width: 10px !important;
+    min-height: 8px !important;
+    min-width: 8px !important;
+  }
+
+  span {
+    max-height: 10px !important;
+    max-width: 10px !important;
+    min-height: 8px !important;
+    min-width: 8px !important;
   }
 
   #spinningadventure {
