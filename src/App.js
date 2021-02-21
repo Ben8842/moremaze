@@ -47,6 +47,7 @@ class Building extends Component {
       complete: false,
       icon: [0, 0],
       stepz: 0,
+      controltime: false,
     };
   }
 
@@ -566,6 +567,9 @@ class Building extends Component {
       //if the stepback becomes larger than the length of the 'move' array pathO
       //then we know the maze is complete and we can end the interval
       clearInterval(this.state.interval);
+      this.setState((state) => {
+        return { controltime: true };
+      });
     }
 
     this.forceUpdate();
@@ -698,7 +702,7 @@ class Building extends Component {
   }
 
   render() {
-    var { stepz } = this.state;
+    var { stepz, controltime } = this.state;
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
@@ -707,19 +711,21 @@ class Building extends Component {
     const bray = [];
     var a;
     var b;
-    for (a = 0; a < 3; a++) {
-      for (b = 0; b < 3; b++) {
-        aray.push(<span>{this.renderControl(b, a)}</span>);
-      }
-      bray.push(
-        <div className="newLineC">
-          {aray.map((value, index) => {
-            return <span key={index}>{value}</span>;
-          })}
-        </div>
-      );
-      for (b = 0; b < 9; b++) {
-        aray.pop();
+    if (controltime == true) {
+      for (a = 0; a < 3; a++) {
+        for (b = 0; b < 3; b++) {
+          aray.push(<span>{this.renderControl(b, a)}</span>);
+        }
+        bray.push(
+          <div className="newLineC">
+            {aray.map((value, index) => {
+              return <span key={index}>{value}</span>;
+            })}
+          </div>
+        );
+        for (b = 0; b < 9; b++) {
+          aray.pop();
+        }
       }
     }
 
@@ -754,7 +760,7 @@ class Building extends Component {
             return <span key={index}>{value}</span>;
           })}
         </div>
-        <div>
+        <div id="mazeSpot">
           {elementZ.map((value, index) => {
             return <span key={index}>{value}</span>;
           })}
@@ -913,12 +919,14 @@ class Building extends Component {
 
     return (
       <div class="entireThing">
-        {stepz == 0 ? explanationZero : null}
-        {stepz == 1 ? explanationOne : null}
-        {stepz == 2 ? explanationTwo : null}
-        {stepz == 3 ? explanationThree : null}
-        {stepz == 4 ? explanationFour : null}
-        {stepz == 5 ? entireThingz : null}
+        <div className="wrapper">
+          {stepz == 0 ? explanationZero : null}
+          {stepz == 1 ? explanationOne : null}
+          {stepz == 2 ? explanationTwo : null}
+          {stepz == 3 ? explanationThree : null}
+          {stepz == 4 ? explanationFour : null}
+          {stepz == 5 ? entireThingz : null}
+        </div>
       </div>
     );
   }
@@ -945,10 +953,10 @@ class App extends Component {
     const inputBox = (
       <div>
         <form>
-          <input class="largebutton" type="number" id="sizeHere"></input>
+          <input class="regbutton" type="number" id="sizeHere"></input>
           <button
             type="button"
-            class="largebutton"
+            class="regbutton"
             onClick={() => this.enterCount()}
           >
             ENTER
@@ -959,9 +967,8 @@ class App extends Component {
     );
     return (
       <div>
-        <div className="HeaderSpot">{inputBox}</div>
-
         <Building sizeValue={count} />
+        <div className="HeaderSpot">{inputBox}</div>
       </div>
     );
   }

@@ -414,6 +414,16 @@ button:focus {
     background-color: rgb(0, 255, 255);
   }
 
+  .regbutton {
+    height: 25px;
+    width: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5;
+    background-color: rgb(0, 255, 255);
+  }
+
   .orange {
     border: none;
     background-color: rgb(255, 0, 200);
@@ -566,30 +576,31 @@ button:focus {
 
   .bgrey {
     border: none;
-    background-color: rgb(107, 105, 107);
+    background-color: rgba(107, 105, 107, 0);
     color: white;
     padding: 0;
     font-size: 5px;
     margin: -2px;
-    height: 20px;
+    height: 50px;
     text-align: center;
-    width: 20px;
+    width: 50px;
   }
 
   .bdirection {
     border: none;
-    background-color: rgb(0, 255, 21);
+    background-color: rgba(0, 255, 21, 0.479);
     color: white;
     padding: 0;
     font-size: 5px;
     margin: -2px;
-    height: 20px;
+    height: 50px;
     text-align: center;
-    width: 20px;
+    width: 50px;
+    z-index: 1;
   }
 
   .directionLand {
-    margin: 20px;
+    position: fixed;
   }
 
   #explanation {
