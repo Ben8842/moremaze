@@ -52,6 +52,9 @@ class Building extends Component {
       mazeProcessing: false,
       mazeEnd: false,
       pointz: 0,
+      niceMove: false,
+      wallMove: false,
+      wallscore: 0,
     };
   }
 
@@ -178,6 +181,8 @@ class Building extends Component {
       icon: [0, 0],
       controltime: false,
       pointz: 0,
+      mazeEnd: false,
+      wallscore: 0,
     });
     this.pathgeneratorOrigin();
   }
@@ -594,102 +599,172 @@ class Building extends Component {
   upmove() {
     var { icon, pathO, pointz } = this.state;
     var u;
+    var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] - 1) {
-        this.setState((state) => {
-          return {
-            icon: [icon[0], icon[1] - 2],
-            pointz: this.state.pointz + 10,
-          };
-        });
+        if (icon[0] == viewSize - 2 && icon[1] - 2 == viewSize - 2) {
+          this.setState((state) => {
+            return {
+              icon: [icon[0], icon[1] - 2],
+              pointz: this.state.pointz + 10,
+              mazeEnd: true,
+              niceMove: false,
+              wallMove: false,
+            };
+          });
+        } else
+          this.setState((state) => {
+            return {
+              icon: [icon[0], icon[1] - 2],
+              pointz: this.state.pointz + 10,
+              niceMove: true,
+              wallMove: false,
+            };
+          });
         break;
-      } else {
-        this.setState((state) => {
-          return {
-            pointz: this.state.pointz - 3,
-          };
-        });
-        console.log("wall");
       }
     }
+    if (u == pathO.length) {
+      this.setState((state) => {
+        return {
+          pointz: this.state.pointz - 3,
+          wallMove: true,
+          niceMove: false,
+          wallscore: this.state.wallscore + 1,
+        };
+      });
+    }
 
-    console.log("up");
+    console.log("up wall");
   }
   downmove() {
-    var { icon, pathO } = this.state;
+    var { icon, pathO, niceMove, wallMove } = this.state;
     var u;
+    var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] + 1) {
-        this.setState((state) => {
-          return {
-            icon: [icon[0], icon[1] + 2],
-            pointz: this.state.pointz + 10,
-          };
-        });
+        if (icon[0] == viewSize - 2 && icon[1] + 2 == viewSize - 2) {
+          this.setState((state) => {
+            return {
+              icon: [icon[0], icon[1] + 2],
+              pointz: this.state.pointz + 10,
+              mazeEnd: true,
+              niceMove: false,
+              wallMove: false,
+            };
+          });
+          break;
+        } else
+          this.setState((state) => {
+            return {
+              icon: [icon[0], icon[1] + 2],
+              pointz: this.state.pointz + 10,
+              niceMove: true,
+              wallMove: false,
+            };
+          });
         break;
-      } else {
-        this.setState((state) => {
-          return {
-            pointz: this.state.pointz - 3,
-          };
-        });
-        console.log("wall");
       }
     }
+    if (u == pathO.length) {
+      this.setState((state) => {
+        return {
+          pointz: this.state.pointz - 3,
+          wallMove: true,
+          niceMove: false,
+          wallscore: this.state.wallscore + 1,
+        };
+      });
+    }
 
-    console.log("down");
+    console.log("down wall");
   }
   rightmove() {
     var { icon, pathO } = this.state;
     var u;
+    var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] + 1 && pathO[u][1] == icon[1]) {
-        this.setState((state) => {
-          return {
-            icon: [icon[0] + 2, icon[1]],
-            pointz: this.state.pointz + 10,
-          };
-        });
+        if (icon[0] + 2 == viewSize - 2 && icon[1] == viewSize - 2) {
+          this.setState((state) => {
+            return {
+              icon: [icon[0] + 2, icon[1]],
+              pointz: this.state.pointz + 10,
+              mazeEnd: true,
+              niceMove: false,
+              wallMove: false,
+            };
+          });
+        } else
+          this.setState((state) => {
+            return {
+              icon: [icon[0] + 2, icon[1]],
+              pointz: this.state.pointz + 10,
+              niceMove: true,
+              wallMove: false,
+            };
+          });
         break;
-      } else {
-        this.setState((state) => {
-          return {
-            pointz: this.state.pointz - 3,
-          };
-        });
-        console.log("wall");
       }
     }
+    if (u == pathO.length) {
+      this.setState((state) => {
+        return {
+          pointz: this.state.pointz - 3,
+          wallMove: true,
+          niceMove: false,
+          wallscore: this.state.wallscore + 1,
+        };
+      });
+    }
 
-    console.log("right");
+    console.log("right wall");
   }
   leftmove() {
     var { icon, pathO } = this.state;
     var u;
+    var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] - 1 && pathO[u][1] == icon[1]) {
-        this.setState((state) => {
-          return {
-            icon: [icon[0] - 2, icon[1]],
-            pointz: this.state.pointz + 10,
-          };
-        });
+        if ([icon[0] - 2, icon[1]] == [viewSize - 2, viewSize - 2]) {
+          this.setState((state) => {
+            return {
+              icon: [icon[0] - 2, icon[1]],
+              pointz: this.state.pointz + 10,
+              mazeEnd: true,
+              niceMove: false,
+              wallMove: false,
+            };
+          });
+        } else
+          this.setState((state) => {
+            return {
+              icon: [icon[0] - 2, icon[1]],
+              pointz: this.state.pointz + 10,
+              niceMove: true,
+              wallMove: false,
+            };
+          });
         break;
-      } else {
-        this.setState((state) => {
-          return {
-            pointz: this.state.pointz - 3,
-          };
-        });
-        console.log("wall");
       }
     }
 
-    console.log("left");
+    if (u == pathO.length) {
+      this.setState((state) => {
+        return {
+          pointz: this.state.pointz - 3,
+          wallMove: true,
+          niceMove: false,
+          wallscore: this.state.wallscore + 1,
+        };
+      });
+    }
+
+    console.log("left wall");
   }
 
   nextExplanation() {
@@ -765,6 +840,9 @@ class Building extends Component {
       complete,
       pointz,
       mazeEnd,
+      niceMove,
+      wallMove,
+      wallscore,
     } = this.state;
     const elementS = [];
     const elementZ = [];
@@ -839,16 +917,32 @@ class Building extends Component {
       </div>
     );
 
+    const niceMoves = (
+      <div id="scoreDisplay">
+        <p>Nice Move! + 10 points</p>
+      </div>
+    );
+
+    const wallMoves = (
+      <div id="scoreDisplay">
+        <p>You hit a wall! -3 points</p>
+      </div>
+    );
+
     const endDisplay = (
       <div id="endDisplay">
         <p>You finished the maze and your score is {pointz}</p>
+        <p>You hit {wallscore} walls.</p>
       </div>
     );
 
     const entireThingz = (
       <div className="entireThing">
         {!mazeEnd ? scoreDisplay : endDisplay}
+        {niceMove ? niceMoves : null}
+        {wallMove ? wallMoves : null}
         {mazeProcessing ? spinner : null}
+
         {!mazeProcessing && !complete ? startButton : null}
         {complete ? againButton : null}
 

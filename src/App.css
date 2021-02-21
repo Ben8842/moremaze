@@ -650,7 +650,7 @@ button:focus {
   #loading {
     color: rgb(72, 255, 0);
     font-size: 12px;
-    text-align: right;
+    text-align: center;
   }
   #scoreDisplay {
     color: rgb(251, 255, 0);
