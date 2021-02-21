@@ -50,6 +50,8 @@ class Building extends Component {
       stepz: 0,
       controltime: false,
       mazeProcessing: false,
+      mazeEnd: false,
+      pointz: 0,
     };
   }
 
@@ -174,9 +176,8 @@ class Building extends Component {
       stepback: 3,
       complete: false,
       icon: [0, 0],
-
       controltime: false,
-      mazeProcessing: false,
+      pointz: 0,
     });
     this.pathgeneratorOrigin();
   }
@@ -591,16 +592,26 @@ class Building extends Component {
   }
 
   upmove() {
-    var { icon, pathO } = this.state;
+    var { icon, pathO, pointz } = this.state;
     var u;
 
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] - 1) {
         this.setState((state) => {
-          return { icon: [icon[0], icon[1] - 2] };
+          return {
+            icon: [icon[0], icon[1] - 2],
+            pointz: this.state.pointz + 10,
+          };
         });
         break;
-      } else console.log("wall");
+      } else {
+        this.setState((state) => {
+          return {
+            pointz: this.state.pointz - 3,
+          };
+        });
+        console.log("wall");
+      }
     }
 
     console.log("up");
@@ -612,13 +623,23 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] + 1) {
         this.setState((state) => {
-          return { icon: [icon[0], icon[1] + 2] };
+          return {
+            icon: [icon[0], icon[1] + 2],
+            pointz: this.state.pointz + 10,
+          };
         });
         break;
-      } else console.log("wall");
+      } else {
+        this.setState((state) => {
+          return {
+            pointz: this.state.pointz - 3,
+          };
+        });
+        console.log("wall");
+      }
     }
 
-    console.log("up");
+    console.log("down");
   }
   rightmove() {
     var { icon, pathO } = this.state;
@@ -627,13 +648,23 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] + 1 && pathO[u][1] == icon[1]) {
         this.setState((state) => {
-          return { icon: [icon[0] + 2, icon[1]] };
+          return {
+            icon: [icon[0] + 2, icon[1]],
+            pointz: this.state.pointz + 10,
+          };
         });
         break;
-      } else console.log("wall");
+      } else {
+        this.setState((state) => {
+          return {
+            pointz: this.state.pointz - 3,
+          };
+        });
+        console.log("wall");
+      }
     }
 
-    console.log("up");
+    console.log("right");
   }
   leftmove() {
     var { icon, pathO } = this.state;
@@ -642,13 +673,23 @@ class Building extends Component {
     for (u = 0; u < pathO.length; u++) {
       if (pathO[u][0] == icon[0] - 1 && pathO[u][1] == icon[1]) {
         this.setState((state) => {
-          return { icon: [icon[0] - 2, icon[1]] };
+          return {
+            icon: [icon[0] - 2, icon[1]],
+            pointz: this.state.pointz + 10,
+          };
         });
         break;
-      } else console.log("wall");
+      } else {
+        this.setState((state) => {
+          return {
+            pointz: this.state.pointz - 3,
+          };
+        });
+        console.log("wall");
+      }
     }
 
-    console.log("up");
+    console.log("left");
   }
 
   nextExplanation() {
@@ -717,7 +758,14 @@ class Building extends Component {
   }
 
   render() {
-    var { stepz, controltime, mazeProcessing, complete } = this.state;
+    var {
+      stepz,
+      controltime,
+      mazeProcessing,
+      complete,
+      pointz,
+      mazeEnd,
+    } = this.state;
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
@@ -785,8 +833,21 @@ class Building extends Component {
       </button>
     );
 
+    const scoreDisplay = (
+      <div id="scoreDisplay">
+        <p>Your Maze Points = {pointz}</p>
+      </div>
+    );
+
+    const endDisplay = (
+      <div id="endDisplay">
+        <p>You finished the maze and your score is {pointz}</p>
+      </div>
+    );
+
     const entireThingz = (
       <div className="entireThing">
+        {!mazeEnd ? scoreDisplay : endDisplay}
         {mazeProcessing ? spinner : null}
         {!mazeProcessing && !complete ? startButton : null}
         {complete ? againButton : null}

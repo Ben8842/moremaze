@@ -652,4 +652,15 @@ button:focus {
     font-size: 12px;
     text-align: right;
   }
+  #scoreDisplay {
+    color: rgb(251, 255, 0);
+    font-size: 12px;
+    text-align: left;
+  }
+
+  #endDisplay {
+    color: rgb(251, 255, 0);
+    font-size: 12px;
+    text-align: left;
+  }
 }
