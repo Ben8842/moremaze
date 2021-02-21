@@ -33,6 +33,7 @@ var firstimg = require("./imgfolder/nestedForLoops.png").default;
 var secondimg = require("./imgfolder/pastDirection.png").default;
 var thirdimg = require("./imgfolder/potentialmove.png").default;
 var fourthimg = require("./imgfolder/structure.png").default;
+var gifimg = require("./imgfolder/spinningtwo.gif").default;
 //import keydown from "react-keydown";
 
 //const KEYS = [37, 38, 39, 40];
@@ -48,6 +49,7 @@ class Building extends Component {
       icon: [0, 0],
       stepz: 0,
       controltime: false,
+      mazeProcessing: false,
     };
   }
 
@@ -168,7 +170,7 @@ class Building extends Component {
 
   pathgeneratorOrigin() {
     var interval = setInterval(this.pathgenerator.bind(this), 25);
-    this.setState({ interval: interval });
+    this.setState({ interval: interval, mazeProcessing: true });
   }
 
   pathgenerator() {
@@ -568,7 +570,7 @@ class Building extends Component {
       //then we know the maze is complete and we can end the interval
       clearInterval(this.state.interval);
       this.setState((state) => {
-        return { controltime: true };
+        return { controltime: true, mazeProcessing: false, complete: true };
       });
     }
 
@@ -702,7 +704,7 @@ class Building extends Component {
   }
 
   render() {
-    var { stepz, controltime } = this.state;
+    var { stepz, controltime, mazeProcessing, complete } = this.state;
     const elementS = [];
     const elementZ = [];
     const viewSize = this.props.sizeValue;
@@ -749,11 +751,25 @@ class Building extends Component {
       }
     }
 
+    const startButton = (
+      <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
+        Click to Start
+      </button>
+    );
+
+    const spinner = (
+      <div>
+        <p id="loading">The Maze Generator Algorithm is now building.</p>
+        <div id="spinwrap">
+          <img id="spinningadventure" src={gifimg}></img>
+        </div>
+      </div>
+    );
+
     const entireThingz = (
       <div className="entireThing">
-        <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
-          Click to Start
-        </button>
+        {mazeProcessing ? spinner : null}
+        {mazeProcessing && !complete ? null : startButton}
 
         <div className="directionLand">
           {bray.map((value, index) => {
@@ -765,6 +781,30 @@ class Building extends Component {
             return <span key={index}>{value}</span>;
           })}
         </div>
+      </div>
+    );
+
+    const introductionPage = (
+      <div id="explanation">
+        <div>
+          <p>Introduction Page</p>
+          <p>This is how it works. </p>
+          My algorithm first examines four potential moves. It examines moving
+          up, down, left and right. It is looking for two things:
+          <li> Are each of these four potential moves are on the board?</li>
+          <li>Has this potential location of the board been visited before?</li>
+          Based on these two conditions the algorithm determines whether any of
+          these four moves are 'valid' and pushes them to an array.
+        </div>
+        <div>
+          <img src={thirdimg} alt="mystery"></img>
+        </div>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          How does the maze work?
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip to the Maze
+        </button>
       </div>
     );
 
@@ -920,6 +960,7 @@ class Building extends Component {
     return (
       <div class="entireThing">
         <div className="wrapper">
+          {stepz == -1 ? introductionPage : null}
           {stepz == 0 ? explanationZero : null}
           {stepz == 1 ? explanationOne : null}
           {stepz == 2 ? explanationTwo : null}
