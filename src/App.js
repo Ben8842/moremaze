@@ -29,6 +29,9 @@ move array and use that 'stepback' value as the spot for 'current' x y values.
 import React, { Component } from "react";
 import { useStopwatch } from "react-timer-hook";
 import "./App.css";
+//import Timer from "easytimer.js";
+import Supertime from "./Timer";
+//const timer = new Timer();
 
 var firstimg = require("./imgfolder/nestedForLoops.png").default;
 var secondimg = require("./imgfolder/pastDirection.png").default;
@@ -38,7 +41,7 @@ var gifimg = require("./imgfolder/spinningtwo.gif").default;
 //import keydown from "react-keydown";
 
 //const KEYS = [37, 38, 39, 40];
-
+/*
 function MyStopwatch() {
   const {
     seconds,
@@ -67,11 +70,18 @@ function MyStopwatch() {
       </div>
     </div>
   );
-}
+}*/
 
 class Building extends Component {
   constructor(props) {
     super(props);
+    // Set the date we're counting down to
+
+    // Update the count down every 1 second
+    //var x = setInterval(this.buildTime(), 1000);
+
+    var now = new Date().getTime();
+    var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
     this.state = {
       pathO: [[0, 0]],
@@ -86,6 +96,9 @@ class Building extends Component {
       niceMove: false,
       wallMove: false,
       wallscore: 0,
+      timeT: 0,
+      nowz: now,
+      countdz: countDownDate,
     };
   }
 
@@ -967,6 +980,12 @@ class Building extends Component {
         <p>You hit {wallscore} walls.</p>
       </div>
     );
+    /*
+    const supertime = (
+      <div>
+        <div id="demo"></div>
+      </div>
+    );*/
 
     const entireThingz = (
       <div className="entireThing">
@@ -1166,6 +1185,11 @@ class Building extends Component {
 
     return (
       <div class="entireThing">
+        <Supertime
+          trackone={mazeEnd}
+          tracktwo={mazeProcessing}
+          trackthree={stepz}
+        />
         <div className="wrapper">
           {stepz == -1 ? introductionPage : null}
           {stepz == 0 ? explanationZero : null}

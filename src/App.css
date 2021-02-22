@@ -702,4 +702,7 @@ button:focus {
     font-size: 12px;
     text-align: left;
   }
+  #clocktime {
+    color: rgb(234, 0, 255);
+  }
 }
