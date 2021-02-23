@@ -5,6 +5,7 @@ import "./index.css";
 class Supertime extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
 
     this.state = {
       nowz: null,
@@ -13,6 +14,7 @@ class Supertime extends Component {
       secondz: 0,
       microsecondz: 0,
       running: false,
+      timescore: 0,
     };
   }
 
@@ -25,7 +27,10 @@ class Supertime extends Component {
   };
 
   stopTimer = () => {
-    this.setState({ running: false });
+    this.setState({
+      running: false,
+      timescore: this.state.secondz + this.state.minutez * 60,
+    });
   };
 
   componentDidMount() {
@@ -74,17 +79,22 @@ class Supertime extends Component {
   }
 
   render() {
-    var { minutez, secondz, microsecondz } = this.state;
+    var { minutez, secondz, microsecondz, timescore } = this.state;
 
     const fancytime = (
       <div id="clocktime">
         {minutez} : {secondz} : {microsecondz}
       </div>
     );
+
+    const celebrate = (
+      <div id="clocktime">{this.state.timescore} seconds is your time!</div>
+    );
     if (
       !this.props.trackone &&
       !this.props.tracktwo &&
-      this.props.trackthree == 5
+      this.props.trackthree == 5 &&
+      this.props.trackfour
     ) {
       this.startTimer();
     } else if (this.state.running) {
@@ -94,9 +104,11 @@ class Supertime extends Component {
       <div>
         {!this.props.trackone &&
         !this.props.tracktwo &&
+        this.props.trackfour &&
         this.props.trackthree == 5
           ? fancytime
           : null}
+        {this.props.trackone ? celebrate : null}
       </div>
     );
   }

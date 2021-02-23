@@ -99,6 +99,7 @@ class Building extends Component {
       timeT: 0,
       nowz: now,
       countdz: countDownDate,
+      flagStart: false,
     };
   }
 
@@ -233,7 +234,11 @@ class Building extends Component {
 
   pathgeneratorOrigin() {
     var interval = setInterval(this.pathgenerator.bind(this), 25);
-    this.setState({ interval: interval, mazeProcessing: true });
+    this.setState({
+      interval: interval,
+      mazeProcessing: true,
+      flagStart: true,
+    });
   }
 
   pathgenerator() {
@@ -888,6 +893,7 @@ class Building extends Component {
       niceMove,
       wallMove,
       wallscore,
+      flagStart,
     } = this.state;
     const elementS = [];
     const elementZ = [];
@@ -1189,6 +1195,7 @@ class Building extends Component {
           trackone={mazeEnd}
           tracktwo={mazeProcessing}
           trackthree={stepz}
+          trackfour={flagStart}
         />
         <div className="wrapper">
           {stepz == -1 ? introductionPage : null}
