@@ -942,9 +942,11 @@ class Building extends Component {
     }
 
     const startButton = (
-      <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
-        Click to Start
-      </button>
+      <div>
+        <button id="largebutton" onClick={() => this.pathgeneratorOrigin()}>
+          Click to Start
+        </button>
+      </div>
     );
 
     const spinner = (
@@ -957,27 +959,33 @@ class Building extends Component {
     );
 
     const againButton = (
-      <button id="largebutton" onClick={() => this.mazeAgain()}>
-        New Maze
-      </button>
+      <div>
+        <button id="largebutton" onClick={() => this.mazeAgain()}>
+          New Maze
+        </button>
+      </div>
     );
 
     const scoreDisplay = (
-      <div id="scoreDisplay">
-        <p>Your Maze Points = {pointz}</p>
-      </div>
+      <span id="scoreDisplay">
+        <span>
+          Your Maze Points = {pointz}
+          {"       "}
+        </span>
+        &nbsp;&nbsp;&nbsp;
+      </span>
     );
 
     const niceMoves = (
-      <div id="scoreDisplay">
-        <p>Nice Move! + 10 points</p>
-      </div>
+      <span id="scoreDisplay">
+        <span>{"    "}Nice Move! + 10 points</span>
+      </span>
     );
 
     const wallMoves = (
-      <div id="scoreDisplay">
-        <p>You hit a wall! -3 points</p>
-      </div>
+      <span id="scoreDisplay">
+        <span>You hit a wall! -3 points</span>
+      </span>
     );
 
     const endDisplay = (
@@ -1196,6 +1204,8 @@ class Building extends Component {
           tracktwo={mazeProcessing}
           trackthree={stepz}
           trackfour={flagStart}
+          trackfive={wallscore}
+          tracksix={pointz}
         />
         <div className="wrapper">
           {stepz == -1 ? introductionPage : null}

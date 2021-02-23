@@ -699,6 +699,7 @@ button:focus {
     color: rgb(251, 255, 0);
     font-size: 12px;
     text-align: left;
+    padding: 15;
   }
 
   #endDisplay {

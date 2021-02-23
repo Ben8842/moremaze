@@ -88,7 +88,7 @@ class Supertime extends Component {
     );
 
     const celebrate = (
-      <div id="clocktime">{this.state.timescore} seconds is your time!</div>
+      <div id="clocktime">{timescore} seconds is your time!</div>
     );
     if (
       !this.props.trackone &&
