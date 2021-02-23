@@ -5,27 +5,30 @@ import "./index.css";
 class Supertime extends Component {
   constructor(props) {
     super(props);
-    var timeShow = this.props.trackone;
-    var timeHide = this.props.tracktwo;
-    var pageindex = this.props.trackthree;
-
-    var now = new Date().getTime();
-    var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
     this.state = {
-      nowz: now,
-      countdz: countDownDate,
+      nowz: null,
+      countdz: null,
       minutez: 0,
       secondz: 0,
       microsecondz: 0,
-      showTime: timeShow,
-      hideTime: timeHide,
-      stepz: pageindex,
+      running: false,
     };
   }
 
+  startTimer = () => {
+    if (this.state.running === false) {
+      console.log("we are starting now");
+      var now = new Date().getTime();
+      this.setState({ nowz: now, running: true });
+    }
+  };
+
+  stopTimer = () => {
+    this.setState({ running: false });
+  };
+
   componentDidMount() {
-    var { nowz, countdz, minutez, secondz, stepz } = this.state;
     var that = this;
     // Set the date we're counting down to
     // var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
@@ -36,7 +39,7 @@ class Supertime extends Component {
       var now = new Date().getTime();
 
       // Find the distance between now and the count down date
-      var distance = countdz - now;
+      var distance = now - that.state.nowz;
 
       // Time calculations for days, hours, minutes and seconds
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -51,7 +54,7 @@ class Supertime extends Component {
       //  document.getElementById("demo").innerHTML =
       //    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       //console.log(this.props);
-      console.log(stepz);
+
       that.setState((state) => {
         return {
           minutez: minutes,
@@ -71,21 +74,22 @@ class Supertime extends Component {
   }
 
   render() {
-    var {
-      minutez,
-      secondz,
-      microsecondz,
-      showTime,
-      hideTime,
-      stepz,
-    } = this.state;
-    console.log(stepz);
+    var { minutez, secondz, microsecondz } = this.state;
 
     const fancytime = (
       <div id="clocktime">
-        {minutez} :: {secondz} :: {microsecondz}
+        {minutez} : {secondz} : {microsecondz}
       </div>
     );
+    if (
+      !this.props.trackone &&
+      !this.props.tracktwo &&
+      this.props.trackthree == 5
+    ) {
+      this.startTimer();
+    } else if (this.state.running) {
+      this.stopTimer();
+    }
     return (
       <div>
         {!this.props.trackone &&

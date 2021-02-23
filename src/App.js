@@ -921,12 +921,12 @@ class Building extends Component {
     var y;
     for (y = 0; y < viewSize; y++) {
       for (x = 0; x < viewSize; x++) {
-        elementS.push(<o>{this.renderSquare(x, y)}</o>);
+        elementS.push(this.renderSquare(x, y));
       }
       elementZ.push(
         <div className="newLine">
           {elementS.map((value, index) => {
-            return <span key={index}>{value}</span>;
+            return value;
           })}
         </div>
       );

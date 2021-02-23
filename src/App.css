@@ -5,6 +5,10 @@
   border: solid;
 }
 
+#clocktime {
+  color: rgb(234, 0, 255);
+}
+
 .entireThing {
   margin: 50px;
   background-color: black;
@@ -704,5 +708,8 @@ button:focus {
   }
   #clocktime {
     color: rgb(234, 0, 255);
+  }
+  .newLine {
+    height: 20px;
   }
 }
