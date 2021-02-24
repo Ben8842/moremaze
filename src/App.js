@@ -1050,7 +1050,7 @@ class Building extends Component {
 
     const explanationZero = (
       <div id="explanation">
-        <div>
+        <div id="sortouttext">
           <p>
             Welcome to my Maze Algorithm. I challenged myself to build an
             algorithm that could build randomly generated mazes.
@@ -1077,7 +1077,7 @@ class Building extends Component {
 
     const explanationOne = (
       <div id="explanation">
-        <div>
+        <div id="sortouttext">
           My algorithm takes this new 'valid' move array and chooses a random
           'valid' move to build a maze path to. I used a random number function
           to accomplish this : "Math.floor(Math.random() * (max - min)) + min"
@@ -1088,21 +1088,23 @@ class Building extends Component {
           </p>
         </div>
         <img src={secondimg} alt="mystery"></img>
-        <button id="largebutton" onClick={() => this.previousExplanation()}>
-          Previous
-        </button>
-        <button id="largebutton" onClick={() => this.nextExplanation()}>
-          Next
-        </button>
-        <button id="largebutton" onClick={() => this.skipExplanation()}>
-          Skip
-        </button>
+        <div>
+          <button id="largebutton" onClick={() => this.previousExplanation()}>
+            Previous
+          </button>
+          <button id="largebutton" onClick={() => this.nextExplanation()}>
+            Next
+          </button>
+          <button id="largebutton" onClick={() => this.skipExplanation()}>
+            Skip
+          </button>
+        </div>
       </div>
     );
 
     const explanationTwo = (
       <div id="explanation">
-        <div>
+        <div id="sortouttext">
           Once a 'random' and 'valid' move is chosen, my algorithm 'moves' to
           this new space on the maze, building the path and recording the move
           into the 'move' array so that I do not visit it again.
@@ -1130,7 +1132,7 @@ class Building extends Component {
 
     const explanationThree = (
       <div id="explanation">
-        <div>
+        <div id="sortouttext">
           <div>
             My maze will innevitably and purposefully draw towards 'dead ends'
             where it will be determined that there are zero valid moves
@@ -1175,7 +1177,7 @@ class Building extends Component {
 
     const explanationFour = (
       <div id="explanation">
-        <div>
+        <div id="sortouttext">
           It is important to reset the stepback state variable each time it
           reaches a new deadend. This way the stepback variable can be used to
           trigger the end of my algorithm. My algorithm knows to stop searching
