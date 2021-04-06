@@ -687,6 +687,7 @@ class Building extends Component {
 
     console.log("up wall");
   }
+
   downmove() {
     var { icon, pathO, niceMove, wallMove } = this.state;
     var u;
@@ -730,6 +731,7 @@ class Building extends Component {
 
     console.log("down wall");
   }
+
   rightmove() {
     var { icon, pathO } = this.state;
     var u;
@@ -772,6 +774,7 @@ class Building extends Component {
 
     console.log("right wall");
   }
+
   leftmove() {
     var { icon, pathO } = this.state;
     var u;
@@ -1051,6 +1054,12 @@ class Building extends Component {
     const explanationZero = (
       <div id="explanation">
         <div id="sortouttext">
+          <button id="largebutton" onClick={() => this.nextExplanation()}>
+            Next
+          </button>
+          <button id="largebutton" onClick={() => this.skipExplanation()}>
+            Skip
+          </button>
           <p>
             Welcome to my Maze Algorithm. I challenged myself to build an
             algorithm that could build randomly generated mazes.
@@ -1066,17 +1075,20 @@ class Building extends Component {
         <div>
           <img src={thirdimg} alt="mystery"></img>
         </div>
+      </div>
+    );
+
+    const explanationOne = (
+      <div id="explanation">
+        <button id="largebutton" onClick={() => this.previousExplanation()}>
+          Previous
+        </button>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
         </button>
         <button id="largebutton" onClick={() => this.skipExplanation()}>
           Skip
         </button>
-      </div>
-    );
-
-    const explanationOne = (
-      <div id="explanation">
         <div id="sortouttext">
           My algorithm takes this new 'valid' move array and chooses a random
           'valid' move to build a maze path to. I used a random number function
@@ -1088,22 +1100,21 @@ class Building extends Component {
           </p>
         </div>
         <img src={secondimg} alt="mystery"></img>
-        <div>
-          <button id="largebutton" onClick={() => this.previousExplanation()}>
-            Previous
-          </button>
-          <button id="largebutton" onClick={() => this.nextExplanation()}>
-            Next
-          </button>
-          <button id="largebutton" onClick={() => this.skipExplanation()}>
-            Skip
-          </button>
-        </div>
+        <div></div>
       </div>
     );
 
     const explanationTwo = (
       <div id="explanation">
+        <button id="largebutton" onClick={() => this.previousExplanation()}>
+          Previous
+        </button>
+        <button id="largebutton" onClick={() => this.nextExplanation()}>
+          Next
+        </button>
+        <button id="largebutton" onClick={() => this.skipExplanation()}>
+          Skip
+        </button>
         <div id="sortouttext">
           Once a 'random' and 'valid' move is chosen, my algorithm 'moves' to
           this new space on the maze, building the path and recording the move
@@ -1118,6 +1129,11 @@ class Building extends Component {
           </p>
           <img src={firstimg} alt="mystery"></img>
         </div>
+      </div>
+    );
+
+    const explanationThree = (
+      <div id="explanation">
         <button id="largebutton" onClick={() => this.previousExplanation()}>
           Previous
         </button>
@@ -1127,11 +1143,6 @@ class Building extends Component {
         <button id="largebutton" onClick={() => this.skipExplanation()}>
           Skip
         </button>
-      </div>
-    );
-
-    const explanationThree = (
-      <div id="explanation">
         <div id="sortouttext">
           <div>
             My maze will innevitably and purposefully draw towards 'dead ends'
@@ -1163,20 +1174,17 @@ class Building extends Component {
             <img src={fourthimg} alt="mystery"></img>
           </div>
         </div>
+      </div>
+    );
+
+    const explanationFour = (
+      <div id="explanation">
         <button id="largebutton" onClick={() => this.previousExplanation()}>
           Previous
         </button>
         <button id="largebutton" onClick={() => this.nextExplanation()}>
           Next
         </button>
-        <button id="largebutton" onClick={() => this.skipExplanation()}>
-          Skip
-        </button>
-      </div>
-    );
-
-    const explanationFour = (
-      <div id="explanation">
         <div id="sortouttext">
           It is important to reset the stepback state variable each time it
           reaches a new deadend. This way the stepback variable can be used to
@@ -1190,12 +1198,6 @@ class Building extends Component {
             maze just for you!
           </p>
         </div>
-        <button id="largebutton" onClick={() => this.previousExplanation()}>
-          Previous
-        </button>
-        <button id="largebutton" onClick={() => this.nextExplanation()}>
-          Next
-        </button>
       </div>
     );
 
