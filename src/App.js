@@ -116,102 +116,103 @@ class Building extends Component {
 
     var i = null;
     for (i = 0; i < pathO.length; i++) {
-      if (stepback == pathO.length && x == icon[0] && y == icon[1]) {
+      if (stepback === pathO.length && x === icon[0] && y === icon[1]) {
         return <button class="icon" codeX={x} codeY={y}></button>;
-      } else if (x == 0 && y == 0) {
+      } else if (x === 0 && y === 0) {
         return <button class="green" codeX={x} codeY={y}></button>;
-      } else if (x == viewSize - 2 && y == viewSize - 2) {
+      } else if (x === viewSize - 2 && y === viewSize - 2) {
         return <button class="green" codeX={x} codeY={y}></button>;
       } else if (
-        x == pathO[pathO.length - 1][0] &&
-        y == pathO[pathO.length - 1][1] &&
+        x === pathO[pathO.length - 1][0] &&
+        y === pathO[pathO.length - 1][1] &&
         stepback < pathO.length
       ) {
         return <button class="blue" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[pathO.length - stepback < 0 ? 0 : pathO.length - stepback][0] &&
-        y == pathO[pathO.length - stepback < 0 ? 0 : pathO.length - stepback][1]
+        y ===
+          pathO[pathO.length - stepback < 0 ? 0 : pathO.length - stepback][1]
       ) {
         return <button class="orange" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 1 < 0 ? 0 : pathO.length - 1 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 1 < 0 ? 0 : pathO.length - 1 - stepback
           ][1]
       ) {
         return <button class="orange2" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 2 < 0 ? 0 : pathO.length - 2 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 2 < 0 ? 0 : pathO.length - 2 - stepback
           ][1]
       ) {
         return <button class="orange3" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 3 < 0 ? 0 : pathO.length - 3 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 3 < 0 ? 0 : pathO.length - 3 - stepback
           ][1]
       ) {
         return <button class="orange4" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 4 < 0 ? 0 : pathO.length - 4 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 4 < 0 ? 0 : pathO.length - 4 - stepback
           ][1]
       ) {
         return <button class="orange5" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 5 < 0 ? 0 : pathO.length - 5 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 5 < 0 ? 0 : pathO.length - 5 - stepback
           ][1]
       ) {
         return <button class="orange6" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 6 < 0 ? 0 : pathO.length - 6 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 6 < 0 ? 0 : pathO.length - 6 - stepback
           ][1]
       ) {
         return <button class="orange7" codeX={x} codeY={y}></button>;
       } else if (
-        x ==
+        x ===
           pathO[
             pathO.length - stepback - 7 < 0 ? 0 : pathO.length - 7 - stepback
           ][0] &&
-        y ==
+        y ===
           pathO[
             pathO.length - stepback - 7 < 0 ? 0 : pathO.length - 7 - stepback
           ][1]
       ) {
         return <button class="orange8" codeX={x} codeY={y}></button>;
-      } else if (x == pathO[i][0] && y == pathO[i][1]) {
+      } else if (x === pathO[i][0] && y === pathO[i][1]) {
         return <button class={bad} codeX={x} codeY={y}></button>;
       }
     }
@@ -241,6 +242,119 @@ class Building extends Component {
     });
   }
 
+  pastDirection(x1, x2, y1, y2) {
+    if (x1 === x2 && y1 > y2) {
+      return 1;
+      //up
+    } else if (x1 === x2 && y1 < y2) {
+      return 2;
+      //down
+    } else if (x1 > x2 && y1 === y2) {
+      return 3;
+      //left
+    } else if (x1 < x2 && y1 === y2) {
+      return 4;
+      //right
+    }
+  }
+
+  calculatesCoordinatesPotentialMoves(exwy, zcounter) {
+    return [
+      [exwy[exwy.length - zcounter][0] + 2, exwy[exwy.length - zcounter][1]],
+      [exwy[exwy.length - zcounter][0] - 2, exwy[exwy.length - zcounter][1]],
+      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] + 2],
+      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] - 2],
+    ];
+  }
+
+  calculateIfMoveOnBoard(potentialMove) {
+    var { height } = this.state;
+    var half = height / 2;
+    var oneBoard = null;
+    var twoBoard = null;
+    var threeBoard = null;
+    var fourBoard = null;
+    var boards = [oneBoard, twoBoard, threeBoard, fourBoard];
+
+    for (var z = 0; z < 4; z++) {
+      if (
+        0 <= potentialMove[z][0] &&
+        potentialMove[z][0] <= height &&
+        0 <= potentialMove[z][1] &&
+        potentialMove[z][1] <= height - 1
+      ) {
+        if (potentialMove[z][0] <= half && potentialMove[z][1] <= half) {
+          if (potentialMove[z][0] + potentialMove[z][1] >= half) {
+            boards[z] = false;
+          }
+        }
+        if (potentialMove[z][0] < half && potentialMove[z][1] > half) {
+          if (potentialMove[z][0] >= potentialMove[z][1] - half) {
+            boards[z] = false;
+          }
+        }
+        if (potentialMove[z][0] >= half && potentialMove[z][1] <= half) {
+          if (potentialMove[z][0] - half <= potentialMove[z][1]) {
+            boards[z] = false;
+          }
+        }
+        if (potentialMove[z][0] >= half && potentialMove[z][1] >= half) {
+          if (potentialMove[z][0] + potentialMove[z][1] <= half + half + half) {
+            boards[z] = false;
+          }
+        }
+      } else boards[z] = true;
+    }
+    return boards;
+  }
+
+  calculatesIfCoordinatesAlreadyVisited(exwy, potentialMove) {
+    var exist = [null, null, null, null];
+
+    var u = 0;
+    var i = 0;
+    var p = 0;
+    var k = 0;
+
+    for (u = 0; u < exwy.length; u++) {
+      if (
+        exwy[u][0] === potentialMove[0][0] &&
+        exwy[u][1] === potentialMove[0][1]
+      ) {
+        exist[0] = true;
+        break;
+      } else exist[0] = false;
+    }
+    for (i = 0; i < exwy.length; i++) {
+      if (
+        exwy[i][0] === potentialMove[1][0] &&
+        exwy[i][1] === potentialMove[1][1]
+      ) {
+        exist[1] = true;
+        break;
+      } else exist[1] = false;
+    }
+    for (p = 0; p < exwy.length; p++) {
+      if (
+        exwy[p][0] === potentialMove[2][0] &&
+        exwy[p][1] === potentialMove[2][1]
+      ) {
+        exist[2] = true;
+        break;
+      } else exist[2] = false;
+    }
+    for (k = 0; k < exwy.length; k++) {
+      if (
+        exwy[k][0] === potentialMove[3][0] &&
+        exwy[k][1] === potentialMove[3][1]
+      ) {
+        exist[3] = true;
+        break;
+      } else exist[3] = false;
+    }
+    return exist;
+  }
+
   pathgenerator() {
     var { pathO } = this.state;
     const viewSize = this.props.sizeValue;
@@ -252,27 +366,27 @@ class Building extends Component {
     }
 
     function pastDirection(x1, x2, y1, y2) {
-      if (x1 == x2 && y1 > y2) {
+      if (x1 === x2 && y1 > y2) {
         return 1;
         //up
-      } else if (x1 == x2 && y1 < y2) {
+      } else if (x1 === x2 && y1 < y2) {
         return 2;
         //down
-      } else if (x1 > x2 && y1 == y2) {
+      } else if (x1 > x2 && y1 === y2) {
         return 3;
         //left
-      } else if (x1 < x2 && y1 == y2) {
+      } else if (x1 < x2 && y1 === y2) {
         return 4;
         //right
       }
     }
 
-    if (pathO.length == 1) {
+    if (pathO.length === 1) {
       var chooser = randomNumber(1, 3);
 
-      if (chooser == 1) {
+      if (chooser === 1) {
         exwy.push([1, 0], [2, 0]);
-      } else if (chooser == 2) {
+      } else if (chooser === 2) {
         exwy.push([0, 1], [0, 2]);
       }
     } else {
@@ -299,8 +413,8 @@ class Building extends Component {
       var k = 0;
       for (u = 0; u < exwy.length; u++) {
         if (
-          exwy[u][0] == potentialMove[0][0] &&
-          exwy[u][1] == potentialMove[0][1]
+          exwy[u][0] === potentialMove[0][0] &&
+          exwy[u][1] === potentialMove[0][1]
         ) {
           one = true;
           break;
@@ -308,8 +422,8 @@ class Building extends Component {
       }
       for (i = 0; i < exwy.length; i++) {
         if (
-          exwy[i][0] == potentialMove[1][0] &&
-          exwy[i][1] == potentialMove[1][1]
+          exwy[i][0] === potentialMove[1][0] &&
+          exwy[i][1] === potentialMove[1][1]
         ) {
           two = true;
           break;
@@ -317,8 +431,8 @@ class Building extends Component {
       }
       for (p = 0; p < exwy.length; p++) {
         if (
-          exwy[p][0] == potentialMove[2][0] &&
-          exwy[p][1] == potentialMove[2][1]
+          exwy[p][0] === potentialMove[2][0] &&
+          exwy[p][1] === potentialMove[2][1]
         ) {
           three = true;
           break;
@@ -326,8 +440,8 @@ class Building extends Component {
       }
       for (k = 0; k < exwy.length; k++) {
         if (
-          exwy[k][0] == potentialMove[3][0] &&
-          exwy[k][1] == potentialMove[3][1]
+          exwy[k][0] === potentialMove[3][0] &&
+          exwy[k][1] === potentialMove[3][1]
         ) {
           four = true;
           break;
@@ -371,21 +485,21 @@ class Building extends Component {
       } else fourBoard = true;
 
       var actualPotentialMoves = [];
-      if (one == false && oneBoard == false) {
+      if (one === false && oneBoard === false) {
         actualPotentialMoves.push(potentialMove[0]);
       }
-      if (two == false && twoBoard == false) {
+      if (two === false && twoBoard === false) {
         actualPotentialMoves.push(potentialMove[1]);
       }
-      if (three == false && threeBoard == false) {
+      if (three === false && threeBoard === false) {
         actualPotentialMoves.push(potentialMove[2]);
       }
-      if (four == false && fourBoard == false) {
+      if (four === false && fourBoard === false) {
         actualPotentialMoves.push(potentialMove[3]);
       }
       //array of valid potential moves (unvisited and on the board) is logged below
 
-      if (actualPotentialMoves.length == 0) {
+      if (actualPotentialMoves.length === 0) {
         this.morePathFinders();
       } else if (pathO.length !== 1) {
         this.state.stepback = 3;
@@ -399,7 +513,7 @@ class Building extends Component {
           actualPotentialMoves[chooserNext - 1][1]
         );
 
-        if (newDir == 3) {
+        if (newDir === 3) {
           exwy.push(
             [
               actualPotentialMoves[chooserNext - 1][0] + 1,
@@ -407,7 +521,7 @@ class Building extends Component {
             ],
             actualPotentialMoves[chooserNext - 1]
           );
-        } else if (newDir == 4) {
+        } else if (newDir === 4) {
           exwy.push(
             [
               actualPotentialMoves[chooserNext - 1][0] - 1,
@@ -415,7 +529,7 @@ class Building extends Component {
             ],
             actualPotentialMoves[chooserNext - 1]
           );
-        } else if (newDir == 1) {
+        } else if (newDir === 1) {
           exwy.push(
             [
               actualPotentialMoves[chooserNext - 1][0],
@@ -423,7 +537,7 @@ class Building extends Component {
             ],
             actualPotentialMoves[chooserNext - 1]
           );
-        } else if (newDir == 2) {
+        } else if (newDir === 2) {
           exwy.push(
             [
               actualPotentialMoves[chooserNext - 1][0],
@@ -453,16 +567,16 @@ class Building extends Component {
 
     var zcounter = stepback;
     function pastAbsDirection(x1, x2, y1, y2) {
-      if (x1 == x2 && y1 > y2) {
+      if (x1 === x2 && y1 > y2) {
         return 1;
         //up
-      } else if (x1 == x2 && y1 < y2) {
+      } else if (x1 === x2 && y1 < y2) {
         return 2;
         //down
-      } else if (x1 > x2 && y1 == y2) {
+      } else if (x1 > x2 && y1 === y2) {
         return 3;
         //left
-      } else if (x1 < x2 && y1 == y2) {
+      } else if (x1 < x2 && y1 === y2) {
         return 4;
         //right
       }
@@ -492,8 +606,8 @@ class Building extends Component {
 
     for (u = 0; u < exwy.length; u++) {
       if (
-        exwy[u][0] == potentialMove[0][0] &&
-        exwy[u][1] == potentialMove[0][1]
+        exwy[u][0] === potentialMove[0][0] &&
+        exwy[u][1] === potentialMove[0][1]
       ) {
         one = true;
         break;
@@ -501,8 +615,8 @@ class Building extends Component {
     }
     for (i = 0; i < exwy.length; i++) {
       if (
-        exwy[i][0] == potentialMove[1][0] &&
-        exwy[i][1] == potentialMove[1][1]
+        exwy[i][0] === potentialMove[1][0] &&
+        exwy[i][1] === potentialMove[1][1]
       ) {
         two = true;
         break;
@@ -510,8 +624,8 @@ class Building extends Component {
     }
     for (p = 0; p < exwy.length; p++) {
       if (
-        exwy[p][0] == potentialMove[2][0] &&
-        exwy[p][1] == potentialMove[2][1]
+        exwy[p][0] === potentialMove[2][0] &&
+        exwy[p][1] === potentialMove[2][1]
       ) {
         three = true;
         break;
@@ -519,8 +633,8 @@ class Building extends Component {
     }
     for (k = 0; k < exwy.length; k++) {
       if (
-        exwy[k][0] == potentialMove[3][0] &&
-        exwy[k][1] == potentialMove[3][1]
+        exwy[k][0] === potentialMove[3][0] &&
+        exwy[k][1] === potentialMove[3][1]
       ) {
         four = true;
         break;
@@ -564,23 +678,23 @@ class Building extends Component {
     } else fourBoard = true;
 
     var actualPotentialMoves = [];
-    if (one == false && oneBoard == false) {
+    if (one === false && oneBoard === false) {
       actualPotentialMoves.push(potentialMove[0]);
     }
-    if (two == false && twoBoard == false) {
+    if (two === false && twoBoard === false) {
       actualPotentialMoves.push(potentialMove[1]);
     }
-    if (three == false && threeBoard == false) {
+    if (three === false && threeBoard === false) {
       actualPotentialMoves.push(potentialMove[2]);
     }
-    if (four == false && fourBoard == false) {
+    if (four === false && fourBoard === false) {
       actualPotentialMoves.push(potentialMove[3]);
     }
     //array of valid potential moves (unvisited and on the board) is logged below
     //console.log("the actual Potential VALID moves are: ");
     //console.log(actualPotentialMoves);
 
-    if (actualPotentialMoves.length == 0) {
+    if (actualPotentialMoves.length === 0) {
       //if length is zero here, then you know there is a 'dead end' in the maze
     } else if (pathO.length !== 1) {
       var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
@@ -595,7 +709,7 @@ class Building extends Component {
 
       //determine the new coordinates based on the direction (coded 1-4)
 
-      if (newDir == 3) {
+      if (newDir === 3) {
         exwy.push(
           [
             actualPotentialMoves[chooserNext - 1][0] + 1,
@@ -603,7 +717,7 @@ class Building extends Component {
           ],
           actualPotentialMoves[chooserNext - 1]
         );
-      } else if (newDir == 4) {
+      } else if (newDir === 4) {
         exwy.push(
           [
             actualPotentialMoves[chooserNext - 1][0] - 1,
@@ -611,7 +725,7 @@ class Building extends Component {
           ],
           actualPotentialMoves[chooserNext - 1]
         );
-      } else if (newDir == 1) {
+      } else if (newDir === 1) {
         exwy.push(
           [
             actualPotentialMoves[chooserNext - 1][0],
@@ -619,7 +733,7 @@ class Building extends Component {
           ],
           actualPotentialMoves[chooserNext - 1]
         );
-      } else if (newDir == 2) {
+      } else if (newDir === 2) {
         exwy.push(
           [
             actualPotentialMoves[chooserNext - 1][0],
@@ -651,8 +765,8 @@ class Building extends Component {
     var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
-      if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] - 1) {
-        if (icon[0] == viewSize - 2 && icon[1] - 2 == viewSize - 2) {
+      if (pathO[u][0] === icon[0] && pathO[u][1] === icon[1] - 1) {
+        if (icon[0] === viewSize - 2 && icon[1] - 2 === viewSize - 2) {
           this.setState((state) => {
             return {
               icon: [icon[0], icon[1] - 2],
@@ -674,7 +788,7 @@ class Building extends Component {
         break;
       }
     }
-    if (u == pathO.length) {
+    if (u === pathO.length) {
       this.setState((state) => {
         return {
           pointz: this.state.pointz - 3,
@@ -694,8 +808,8 @@ class Building extends Component {
     var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
-      if (pathO[u][0] == icon[0] && pathO[u][1] == icon[1] + 1) {
-        if (icon[0] == viewSize - 2 && icon[1] + 2 == viewSize - 2) {
+      if (pathO[u][0] === icon[0] && pathO[u][1] === icon[1] + 1) {
+        if (icon[0] === viewSize - 2 && icon[1] + 2 === viewSize - 2) {
           this.setState((state) => {
             return {
               icon: [icon[0], icon[1] + 2],
@@ -718,7 +832,7 @@ class Building extends Component {
         break;
       }
     }
-    if (u == pathO.length) {
+    if (u === pathO.length) {
       this.setState((state) => {
         return {
           pointz: this.state.pointz - 3,
@@ -738,8 +852,8 @@ class Building extends Component {
     var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
-      if (pathO[u][0] == icon[0] + 1 && pathO[u][1] == icon[1]) {
-        if (icon[0] + 2 == viewSize - 2 && icon[1] == viewSize - 2) {
+      if (pathO[u][0] === icon[0] + 1 && pathO[u][1] === icon[1]) {
+        if (icon[0] + 2 === viewSize - 2 && icon[1] === viewSize - 2) {
           this.setState((state) => {
             return {
               icon: [icon[0] + 2, icon[1]],
@@ -761,7 +875,7 @@ class Building extends Component {
         break;
       }
     }
-    if (u == pathO.length) {
+    if (u === pathO.length) {
       this.setState((state) => {
         return {
           pointz: this.state.pointz - 3,
@@ -781,8 +895,8 @@ class Building extends Component {
     var viewSize = this.props.sizeValue;
 
     for (u = 0; u < pathO.length; u++) {
-      if (pathO[u][0] == icon[0] - 1 && pathO[u][1] == icon[1]) {
-        if ([icon[0] - 2, icon[1]] == [viewSize - 2, viewSize - 2]) {
+      if (pathO[u][0] === icon[0] - 1 && pathO[u][1] === icon[1]) {
+        if ([icon[0] - 2, icon[1]] === [viewSize - 2, viewSize - 2]) {
           this.setState((state) => {
             return {
               icon: [icon[0] - 2, icon[1]],
@@ -805,7 +919,7 @@ class Building extends Component {
       }
     }
 
-    if (u == pathO.length) {
+    if (u === pathO.length) {
       this.setState((state) => {
         return {
           pointz: this.state.pointz - 3,
@@ -839,13 +953,13 @@ class Building extends Component {
 
   renderControl(x, y) {
     if (
-      (x == 0 && y == 0) |
-      (x == 2 && y == 0) |
-      (x == 0 && y == 2) |
-      (x == 2 && y == 2)
+      (x === 0 && y === 0) |
+      (x === 2 && y === 0) |
+      (x === 0 && y === 2) |
+      (x === 2 && y === 2)
     ) {
       return <button class="bgrey" codeX={x} codeY={y}></button>;
-    } else if (x == 1 && y == 0) {
+    } else if (x === 1 && y === 0) {
       return (
         <button
           class="bdirection"
@@ -854,7 +968,7 @@ class Building extends Component {
           onClick={() => this.upmove()}
         ></button>
       );
-    } else if (x == 0 && y == 1) {
+    } else if (x === 0 && y === 1) {
       return (
         <button
           class="bdirection"
@@ -863,7 +977,7 @@ class Building extends Component {
           onClick={() => this.leftmove()}
         ></button>
       );
-    } else if (x == 2 && y == 1) {
+    } else if (x === 2 && y === 1) {
       return (
         <button
           class="bdirection"
@@ -872,7 +986,7 @@ class Building extends Component {
           onClick={() => this.rightmove()}
         ></button>
       );
-    } else if (x == 1 && y == 2) {
+    } else if (x === 1 && y === 2) {
       return (
         <button
           class="bdirection"
@@ -906,7 +1020,7 @@ class Building extends Component {
     const bray = [];
     var a;
     var b;
-    if (controltime == true) {
+    if (controltime === true) {
       for (a = 0; a < 3; a++) {
         for (b = 0; b < 3; b++) {
           aray.push(<span>{this.renderControl(b, a)}</span>);
@@ -1212,13 +1326,13 @@ class Building extends Component {
           tracksix={pointz}
         />
         <div className="wrapper">
-          {stepz == -1 ? introductionPage : null}
-          {stepz == 0 ? explanationZero : null}
-          {stepz == 1 ? explanationOne : null}
-          {stepz == 2 ? explanationTwo : null}
-          {stepz == 3 ? explanationThree : null}
-          {stepz == 4 ? explanationFour : null}
-          {stepz == 5 ? entireThingz : null}
+          {stepz === -1 ? introductionPage : null}
+          {stepz === 0 ? explanationZero : null}
+          {stepz === 1 ? explanationOne : null}
+          {stepz === 2 ? explanationTwo : null}
+          {stepz === 3 ? explanationThree : null}
+          {stepz === 4 ? explanationFour : null}
+          {stepz === 5 ? entireThingz : null}
         </div>
       </div>
     );
