@@ -275,34 +275,16 @@ class Building extends Component {
     var threeBoard = null;
     var fourBoard = null;
     var boards = [oneBoard, twoBoard, threeBoard, fourBoard];
-
+    const viewSize = this.props.sizeValue;
+    const sizeLimit = viewSize - 1;
     for (var z = 0; z < 4; z++) {
       if (
         0 <= potentialMove[z][0] &&
-        potentialMove[z][0] <= height &&
+        potentialMove[z][0] <= sizeLimit &&
         0 <= potentialMove[z][1] &&
-        potentialMove[z][1] <= height - 1
+        potentialMove[z][1] <= sizeLimit - 1
       ) {
-        if (potentialMove[z][0] <= half && potentialMove[z][1] <= half) {
-          if (potentialMove[z][0] + potentialMove[z][1] >= half) {
-            boards[z] = false;
-          }
-        }
-        if (potentialMove[z][0] < half && potentialMove[z][1] > half) {
-          if (potentialMove[z][0] >= potentialMove[z][1] - half) {
-            boards[z] = false;
-          }
-        }
-        if (potentialMove[z][0] >= half && potentialMove[z][1] <= half) {
-          if (potentialMove[z][0] - half <= potentialMove[z][1]) {
-            boards[z] = false;
-          }
-        }
-        if (potentialMove[z][0] >= half && potentialMove[z][1] >= half) {
-          if (potentialMove[z][0] + potentialMove[z][1] <= half + half + half) {
-            boards[z] = false;
-          }
-        }
+        boards[z] = false;
       } else boards[z] = true;
     }
     return boards;
@@ -357,28 +339,11 @@ class Building extends Component {
 
   pathgenerator() {
     var { pathO } = this.state;
-    const viewSize = this.props.sizeValue;
-    const sizeLimit = viewSize - 2;
+
     var exwy = pathO;
 
     function randomNumber(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
-    }
-
-    function pastDirection(x1, x2, y1, y2) {
-      if (x1 === x2 && y1 > y2) {
-        return 1;
-        //up
-      } else if (x1 === x2 && y1 < y2) {
-        return 2;
-        //down
-      } else if (x1 > x2 && y1 === y2) {
-        return 3;
-        //left
-      } else if (x1 < x2 && y1 === y2) {
-        return 4;
-        //right
-      }
     }
 
     if (pathO.length === 1) {
@@ -390,111 +355,24 @@ class Building extends Component {
         exwy.push([0, 1], [0, 2]);
       }
     } else {
-      var potentialMove = [
-        [exwy[exwy.length - 1][0] + 2, exwy[exwy.length - 1][1]],
-        [exwy[exwy.length - 1][0] - 2, exwy[exwy.length - 1][1]],
-        [exwy[exwy.length - 1][0], exwy[exwy.length - 1][1] + 2],
-        [exwy[exwy.length - 1][0], exwy[exwy.length - 1][1] - 2],
-      ];
-
-      //these flags below mark whether the potential move exists in move array
-      var one = null;
-      var two = null;
-      var three = null;
-      var four = null;
-      //these flags below mark whether the potential move is on the board or off the board
-      var oneBoard = null;
-      var twoBoard = null;
-      var threeBoard = null;
-      var fourBoard = null;
-      var u = 0;
-      var i = 0;
-      var p = 0;
-      var k = 0;
-      for (u = 0; u < exwy.length; u++) {
-        if (
-          exwy[u][0] === potentialMove[0][0] &&
-          exwy[u][1] === potentialMove[0][1]
-        ) {
-          one = true;
-          break;
-        } else one = false;
-      }
-      for (i = 0; i < exwy.length; i++) {
-        if (
-          exwy[i][0] === potentialMove[1][0] &&
-          exwy[i][1] === potentialMove[1][1]
-        ) {
-          two = true;
-          break;
-        } else two = false;
-      }
-      for (p = 0; p < exwy.length; p++) {
-        if (
-          exwy[p][0] === potentialMove[2][0] &&
-          exwy[p][1] === potentialMove[2][1]
-        ) {
-          three = true;
-          break;
-        } else three = false;
-      }
-      for (k = 0; k < exwy.length; k++) {
-        if (
-          exwy[k][0] === potentialMove[3][0] &&
-          exwy[k][1] === potentialMove[3][1]
-        ) {
-          four = true;
-          break;
-        } else four = false;
-      }
-
-      if (
-        0 <= potentialMove[0][0] &&
-        potentialMove[0][0] <= sizeLimit &&
-        0 <= potentialMove[0][1] &&
-        potentialMove[0][1] <= sizeLimit
-      ) {
-        oneBoard = false;
-      } else oneBoard = true;
-
-      if (
-        0 <= potentialMove[1][0] &&
-        potentialMove[1][0] <= sizeLimit &&
-        0 <= potentialMove[1][1] &&
-        potentialMove[1][1] <= sizeLimit
-      ) {
-        twoBoard = false;
-      } else twoBoard = true;
-
-      if (
-        0 <= potentialMove[2][0] &&
-        potentialMove[2][0] <= sizeLimit &&
-        0 <= potentialMove[2][1] &&
-        potentialMove[2][1] <= sizeLimit
-      ) {
-        threeBoard = false;
-      } else threeBoard = true;
-
-      if (
-        0 <= potentialMove[3][0] &&
-        potentialMove[3][0] <= sizeLimit &&
-        0 <= potentialMove[3][1] &&
-        potentialMove[3][1] <= sizeLimit
-      ) {
-        fourBoard = false;
-      } else fourBoard = true;
+      var potentialMove = this.calculatesCoordinatesPotentialMoves(exwy, 1);
+      var exist = this.calculatesIfCoordinatesAlreadyVisited(
+        exwy,
+        potentialMove
+      );
+      var boards = this.calculateIfMoveOnBoard(potentialMove);
 
       var actualPotentialMoves = [];
-      if (one === false && oneBoard === false) {
+      if (exist[0] === false && boards[0] === false) {
         actualPotentialMoves.push(potentialMove[0]);
       }
-      if (two === false && twoBoard === false) {
+      if (exist[1] === false && boards[1] === false) {
         actualPotentialMoves.push(potentialMove[1]);
       }
-      if (three === false && threeBoard === false) {
+      if (exist[2] === false && boards[2] === false) {
         actualPotentialMoves.push(potentialMove[2]);
       }
-      if (four === false && fourBoard === false) {
+      if (exist[3] === false && boards[3] === false) {
         actualPotentialMoves.push(potentialMove[3]);
       }
       //array of valid potential moves (unvisited and on the board) is logged below
@@ -506,7 +384,7 @@ class Building extends Component {
 
         var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
 
-        var newDir = pastDirection(
+        var newDir = this.pastDirection(
           exwy[exwy.length - 1][0],
           actualPotentialMoves[chooserNext - 1][0],
           exwy[exwy.length - 1][1],
@@ -557,8 +435,7 @@ class Building extends Component {
 
   morePathFinders() {
     var { pathO, stepback } = this.state;
-    const viewSize = this.props.sizeValue;
-    const sizeLimit = viewSize - 2;
+
     var exwy = pathO;
 
     function randomNumber(min, max) {
@@ -566,128 +443,28 @@ class Building extends Component {
     }
 
     var zcounter = stepback;
-    function pastAbsDirection(x1, x2, y1, y2) {
-      if (x1 === x2 && y1 > y2) {
-        return 1;
-        //up
-      } else if (x1 === x2 && y1 < y2) {
-        return 2;
-        //down
-      } else if (x1 > x2 && y1 === y2) {
-        return 3;
-        //left
-      } else if (x1 < x2 && y1 === y2) {
-        return 4;
-        //right
-      }
-    }
 
-    var potentialMove = [
-      [exwy[exwy.length - zcounter][0] + 2, exwy[exwy.length - zcounter][1]],
-      [exwy[exwy.length - zcounter][0] - 2, exwy[exwy.length - zcounter][1]],
-      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] + 2],
-      [exwy[exwy.length - zcounter][0], exwy[exwy.length - zcounter][1] - 2],
-    ];
+    var potentialMove = this.calculatesCoordinatesPotentialMoves(
+      exwy,
+      zcounter
+    );
+
+    var exist = this.calculatesIfCoordinatesAlreadyVisited(exwy, potentialMove);
+    var boards = this.calculateIfMoveOnBoard(potentialMove);
 
     //these flags below mark whether the potential move exists in move array
-    var one = null;
-    var two = null;
-    var three = null;
-    var four = null;
-    //these below mark whether the potential move is on the board
-    var oneBoard = null;
-    var twoBoard = null;
-    var threeBoard = null;
-    var fourBoard = null;
-    var u = 0;
-    var i = 0;
-    var p = 0;
-    var k = 0;
-
-    for (u = 0; u < exwy.length; u++) {
-      if (
-        exwy[u][0] === potentialMove[0][0] &&
-        exwy[u][1] === potentialMove[0][1]
-      ) {
-        one = true;
-        break;
-      } else one = false;
-    }
-    for (i = 0; i < exwy.length; i++) {
-      if (
-        exwy[i][0] === potentialMove[1][0] &&
-        exwy[i][1] === potentialMove[1][1]
-      ) {
-        two = true;
-        break;
-      } else two = false;
-    }
-    for (p = 0; p < exwy.length; p++) {
-      if (
-        exwy[p][0] === potentialMove[2][0] &&
-        exwy[p][1] === potentialMove[2][1]
-      ) {
-        three = true;
-        break;
-      } else three = false;
-    }
-    for (k = 0; k < exwy.length; k++) {
-      if (
-        exwy[k][0] === potentialMove[3][0] &&
-        exwy[k][1] === potentialMove[3][1]
-      ) {
-        four = true;
-        break;
-      } else four = false;
-    }
-
-    if (
-      0 <= potentialMove[0][0] &&
-      potentialMove[0][0] <= sizeLimit &&
-      0 <= potentialMove[0][1] &&
-      potentialMove[0][1] <= sizeLimit
-    ) {
-      oneBoard = false;
-    } else oneBoard = true;
-
-    if (
-      0 <= potentialMove[1][0] &&
-      potentialMove[1][0] <= sizeLimit &&
-      0 <= potentialMove[1][1] &&
-      potentialMove[1][1] <= sizeLimit
-    ) {
-      twoBoard = false;
-    } else twoBoard = true;
-
-    if (
-      0 <= potentialMove[2][0] &&
-      potentialMove[2][0] <= sizeLimit &&
-      0 <= potentialMove[2][1] &&
-      potentialMove[2][1] <= sizeLimit
-    ) {
-      threeBoard = false;
-    } else threeBoard = true;
-
-    if (
-      0 <= potentialMove[3][0] &&
-      potentialMove[3][0] <= sizeLimit &&
-      0 <= potentialMove[3][1] &&
-      potentialMove[3][1] <= sizeLimit
-    ) {
-      fourBoard = false;
-    } else fourBoard = true;
 
     var actualPotentialMoves = [];
-    if (one === false && oneBoard === false) {
+    if (exist[0] === false && boards[0] === false) {
       actualPotentialMoves.push(potentialMove[0]);
     }
-    if (two === false && twoBoard === false) {
+    if (exist[1] === false && boards[1] === false) {
       actualPotentialMoves.push(potentialMove[1]);
     }
-    if (three === false && threeBoard === false) {
+    if (exist[2] === false && boards[2] === false) {
       actualPotentialMoves.push(potentialMove[2]);
     }
-    if (four === false && fourBoard === false) {
+    if (exist[3] === false && boards[3] === false) {
       actualPotentialMoves.push(potentialMove[3]);
     }
     //array of valid potential moves (unvisited and on the board) is logged below
@@ -700,7 +477,7 @@ class Building extends Component {
       var chooserNext = randomNumber(1, actualPotentialMoves.length + 1);
 
       //execution and use of a function that determines the direction of the last move
-      var newDir = pastAbsDirection(
+      var newDir = this.pastDirection(
         exwy[exwy.length - zcounter][0],
         actualPotentialMoves[chooserNext - 1][0],
         exwy[exwy.length - zcounter][1],
